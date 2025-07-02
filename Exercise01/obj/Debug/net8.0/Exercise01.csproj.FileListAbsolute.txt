@@ -1,0 +1,14 @@
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/bin/Debug/net8.0/Exercise01
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/bin/Debug/net8.0/Exercise01.deps.json
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/bin/Debug/net8.0/Exercise01.runtimeconfig.json
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/bin/Debug/net8.0/Exercise01.dll
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/bin/Debug/net8.0/Exercise01.pdb
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.AssemblyInfoInputs.cache
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.AssemblyInfo.cs
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.csproj.CoreCompileInputs.cache
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.dll
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/refint/Exercise01.dll
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.pdb
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/Exercise01.genruntimeconfig.cache
+/Users/pascal-maker/Downloads/firstproject 4/Exercise01/obj/Debug/net8.0/ref/Exercise01.dll

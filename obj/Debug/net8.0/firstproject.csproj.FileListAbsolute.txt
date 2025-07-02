@@ -1,0 +1,29 @@
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net8.0/firstproject
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net8.0/firstproject.deps.json
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net8.0/firstproject.runtimeconfig.json
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net8.0/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net8.0/firstproject.pdb
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.AssemblyInfoInputs.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.AssemblyInfo.cs
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.csproj.CoreCompileInputs.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.sourcelink.json
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/refint/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.pdb
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/firstproject.genruntimeconfig.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net8.0/ref/firstproject.dll
+/Users/pascal-maker/Downloads/firstproject 4/bin/Debug/net8.0/firstproject
+/Users/pascal-maker/Downloads/firstproject 4/bin/Debug/net8.0/firstproject.deps.json
+/Users/pascal-maker/Downloads/firstproject 4/bin/Debug/net8.0/firstproject.runtimeconfig.json
+/Users/pascal-maker/Downloads/firstproject 4/bin/Debug/net8.0/firstproject.dll
+/Users/pascal-maker/Downloads/firstproject 4/bin/Debug/net8.0/firstproject.pdb
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.AssemblyInfoInputs.cache
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.AssemblyInfo.cs
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.csproj.CoreCompileInputs.cache
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.dll
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/refint/firstproject.dll
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.pdb
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/firstproject.genruntimeconfig.cache
+/Users/pascal-maker/Downloads/firstproject 4/obj/Debug/net8.0/ref/firstproject.dll
