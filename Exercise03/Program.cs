@@ -59,13 +59,13 @@ class Exercise03
                 Console.WriteLine("Enter a number for k:");
                 int k = Convert.ToInt32(Console.ReadLine());
 
-                int l = j / k;
+                int l = j * k;
 
 
                 Console.WriteLine($" The multiplication of  {j} and {k} is {l}");
                 break;    
                 
-            default:
+            case 5:
                 Console.WriteLine("Exit.");
                 break;    
                 
