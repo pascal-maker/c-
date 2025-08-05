@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pascal-maker/Downloads/firstproject 4/firstproject.csproj",
+      "projectUniqueName": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
       "projectName": "firstproject",
-      "projectPath": "/Users/pascal-maker/Downloads/firstproject 4/firstproject.csproj",
+      "projectPath": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
       "packagesPath": "/Users/pascal-maker/.nuget/packages/",
-      "outputPath": "/Users/pascal-maker/Downloads/firstproject 4/obj/",
+      "outputPath": "/Users/pascal-maker/Desktop/c-/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/pascal-maker/.nuget/NuGet/NuGet.Config"

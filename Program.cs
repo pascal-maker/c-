@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 
+Person p  = new Person("John", 42,"Kortrijk");
+Console.WriteLine(p.ToString());
