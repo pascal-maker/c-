@@ -1,2 +1,4 @@
 # c-
-well i need to practice writing code for C# 
+well I need to practice writing code for C# 
+
+In total there are 6 chapters and a mockexam.
