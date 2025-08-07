@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "M7NJw/7wVZjnq9CWTjyZxuUclhyG/BxqGCAmFHElTEigDVGr98BdwcXXDB0X+dcDwVApBLnJq4FgXM8EcSCoqg==",
+  "success": true,
+  "projectFilePath": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj",
+  "expectedPackageFiles": [
+    "/Users/pascal-maker/.nuget/packages/csvhelper/33.1.0/csvhelper.33.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

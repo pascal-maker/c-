@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "MHd2uk77RJzN+eK9ymkLeOR4eO2WnShrMxmB4koeVvm1z8NPTNcZjK3CksiP7A94OtH9m7vuGUiFR6iTkjoQbA==",
+  "dgSpecHash": "P/2HbFUEwT+1lD00w5EQEcG1a/wEHLwDLFhh/RIq7q6HnjotuKWI1h9x8X8UG84+QgxbFRncA3Uc/685TpNMAQ==",
   "success": true,
   "projectFilePath": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/pascal-maker/.nuget/packages/csvhelper/33.1.0/csvhelper.33.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -56,11 +56,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
-      "projectName": "firstproject",
-      "projectPath": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
+      "projectUniqueName": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj",
+      "projectName": "Exercise01",
+      "projectPath": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj",
       "packagesPath": "/Users/pascal-maker/.nuget/packages/",
-      "outputPath": "/Users/pascal-maker/Desktop/c-/obj/",
+      "outputPath": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/pascal-maker/.nuget/NuGet/NuGet.Config"
