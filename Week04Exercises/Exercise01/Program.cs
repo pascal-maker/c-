@@ -12,6 +12,13 @@ namespace Ct.Ai
             var repo = new SmartPhoneRepository();
             var service = new SmartPhoneService(repo);
 
+            //Creates a repository object that handles data storage/retrieval for smartphones (e.g., reading/writing from CSV).
+
+
+//Creates a service layer that uses the repository (repo) to perform higher-level operations like adding, searching, etc.
+
+//This helps keep business logic separate from raw data access.
+
             bool running = true;
 
             while (running)

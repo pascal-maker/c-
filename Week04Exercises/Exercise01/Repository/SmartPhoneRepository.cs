@@ -9,7 +9,7 @@ namespace Ct.Ai.Repositories
     public class SmartPhoneRepository
     {
         private readonly string _filePath = "Data/smartphones.csv";
-
+        // Create a Smartphone object from the parts
         public List<Smartphone> GetSmartphones()
         {
             var lines = File.ReadAllLines(_filePath);
@@ -32,13 +32,16 @@ namespace Ct.Ai.Repositories
             return smartphones;
         }
 
+        //This method is responsible for adding one new smartphone to your CSV file.
+
         public void AddSmartphone(Smartphone phone)
 
         {
             using var writer = File.AppendText(_filePath);
             writer.WriteLine($"{phone.Id},{phone.Brand},{phone.Type},{phone.ReleaseYear},{phone.StartPrice},{phone.OperatingSystem}");
         }
-
+        
+        //this methpd looks throught the list foe all smartphones and returns one with a matching id for null ifnone is found GETsartPhones loads allphones rom csv firstorDefaults.Id--id) finds the first march or returns null the ? in smarthone means its okay if nothing is found
         public Smartphone? GetSmartphoneById(int id)
         {
             return GetSmartphones().FirstOrDefault(s => s.Id == id);
