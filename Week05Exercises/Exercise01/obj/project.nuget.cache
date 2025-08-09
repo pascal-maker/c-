@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "bPPa3eQavfgofCCEW6XOGPsxwWGS6yRkgfg8wgMxgCt+LbOiPusrvNtbpjLoyEw6SiJEzMbhXUcECW0ooXEjrg==",
+  "success": true,
+  "projectFilePath": "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/Exercise01.csproj",
+  "expectedPackageFiles": [
+    "/Users/pascal-maker/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

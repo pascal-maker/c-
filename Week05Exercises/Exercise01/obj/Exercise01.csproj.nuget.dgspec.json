@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj": {}
+    "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/Exercise01.csproj": {}
   },
   "projects": {
-    "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj": {
+    "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/Exercise01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj",
+        "projectUniqueName": "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/Exercise01.csproj",
         "projectName": "Exercise01",
-        "projectPath": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/Exercise01.csproj",
+        "projectPath": "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/Exercise01.csproj",
         "packagesPath": "/Users/pascal-maker/.nuget/packages/",
-        "outputPath": "/Users/pascal-maker/Desktop/c-/Week04Exercises/Exercise01/obj/",
+        "outputPath": "/Users/pascal-maker/Desktop/c-/Week05Exercises/Exercise01/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/pascal-maker/.nuget/NuGet/NuGet.Config"
@@ -38,10 +38,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "CsvHelper": {
-              "target": "Package",
-              "version": "[33.1.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
