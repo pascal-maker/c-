@@ -18,7 +18,6 @@ namespace Exercise02.Models
             Map(m => m.Longitude).Name("longitude");
             Map(m => m.PinCode).Name("Pin code");
 
-            // ✅ Fix for Output: convert "Yes"/"No" to bool
             Map(m => m.Output)
                 .Name("Output")
                 .TypeConverterOption.BooleanValues(true, true, "Yes")
@@ -28,3 +27,4 @@ namespace Exercise02.Models
         }
     }
 }
+
