@@ -1,0 +1,25 @@
+Age,Gender,Marital Status,Occupation,Monthly Income,Educational Qualifications,Family size,latitude,longitude,Pin code,Output,Feedback
+21,Female,Single,Student,Below Rs.10000,Post Graduate,1,12.9783,77.6408,560038,Yes,Positive
+22,Female,Single,Student,No Income,Post Graduate,1,12.8845,77.6036,560076,Yes,Positive
+23,Male,Single,Student,25001 to 50000,Post Graduate,1,13.0158,77.539,560096,Yes,Positive
+25,Male,Single,Student,No Income,Graduate,1,12.977,77.5773,560009,Yes,Positive
+26,Male,Single,Self Employeed,10001 to 25000,Ph.D,1,12.9698,77.75,560066,No,Positive
+23,Male,Single,Student,No Income,Post Graduate,1,12.9561,77.5921,560027,Yes,Positive
+25,Male,Single,Student,No Income,Graduate,1,12.977,77.5773,560009,Yes,Positive
+25,Male,Single,Student,No Income,Post Graduate,1,12.9343,77.6044,560029,Yes,Positive
+25,Male,Single,Student,No Income,Post Graduate,1,12.9343,77.6044,560029,Yes,Positive
+32,Female,Married,Employee,More than 50000,Graduate,1,13.0019,77.5713,560003,No,Positive
+22,Male,Single,Student,No Income,Post Graduate,1,13.0626,77.5284,560015,Yes,Positive
+27,Male,Prefer not to say,Employee,25001 to 50000,Post Graduate,1,13.0166,77.6804,560016,Yes,Positive
+26,Male,Single,Employee,Below Rs.10000,Post Graduate,1,12.957,77.5637,560018,Yes,"Negative "
+28,Male,Married,Employee,More than 50000,Post Graduate,1,12.9925,77.5633,560021,Yes,Positive
+23,Female,Single,Student,No Income,Graduate,1,12.977,77.5773,560009,Yes,Positive
+21,Female,Single,Student,No Income,Post Graduate,1,12.9217,77.5936,560041,Yes,Positive
+30,Male,Married,Self Employeed,More than 50000,Graduate,1,13.0809,77.5565,560097,No,"Negative "
+31,Male,Prefer not to say,Employee,Below Rs.10000,Graduate,1,12.9866,77.4904,560091,No,"Negative "
+25,Female,Married,Employee,More than 50000,Graduate,1,12.977,77.5773,560009,No,"Negative "
+22,Male,Single,Employee,10001 to 25000,Graduate,1,13.0138,77.5877,560006,Yes,Positive
+23,Female,Single,Student,No Income,Graduate,1,12.977,77.5773,560009,Yes,Positive
+23,Female,Single,Student,No Income,Graduate,1,12.977,77.5773,560009,Yes,Positive
+30,Male,Married,Self Employeed,More than 50000,Graduate,1,13.0809,77.5565,560097,No,"Negative "
+31,Male,Prefer not to say,Employee,Below Rs.10000,Graduate,1,12.9866,77.4904,560091,No,"Negative "
