@@ -92,54 +92,11 @@ namespace CTAndAI.CarReservationSystem.Repositories
             return null;
         }
 
-        public void AddCar(Car car)
-        {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new MySqlCommand(
-                    "INSERT INTO Cars (Id, Brand, Model, Year, PricePerDay, Electric, LicensePlate) VALUES (@Id, @Brand, @Model, @Year, @PricePerDay, @Electric, @LicensePlate)", 
-                    connection);
-                command.Parameters.AddWithValue("@Id", car.Id);
-                command.Parameters.AddWithValue("@Brand", car.Brand);
-                command.Parameters.AddWithValue("@Model", car.Model);
-                command.Parameters.AddWithValue("@Year", car.Year);
-                command.Parameters.AddWithValue("@PricePerDay", car.PricePerDay);
-                command.Parameters.AddWithValue("@Electric", car.Electric);
-                command.Parameters.AddWithValue("@LicensePlate", car.LicensePlate);
-                command.ExecuteNonQuery();
-            }
-        }
 
-        public void UpdateCar(Car car)
-        {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new MySqlCommand(
-                    "UPDATE Cars SET Brand = @Brand, Model = @Model, Year = @Year, PricePerDay = @PricePerDay, Electric = @Electric, LicensePlate = @LicensePlate WHERE Id = @Id", 
-                    connection);
-                command.Parameters.AddWithValue("@Id", car.Id);
-                command.Parameters.AddWithValue("@Brand", car.Brand);
-                command.Parameters.AddWithValue("@Model", car.Model);
-                command.Parameters.AddWithValue("@Year", car.Year);
-                command.Parameters.AddWithValue("@PricePerDay", car.PricePerDay);
-                command.Parameters.AddWithValue("@Electric", car.Electric);
-                command.Parameters.AddWithValue("@LicensePlate", car.LicensePlate);
-                command.ExecuteNonQuery();
-            }
-        }
 
-        public void DeleteCar(int id)
-        {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new MySqlCommand("DELETE FROM Cars WHERE Id = @Id", connection);
-                command.Parameters.AddWithValue("@Id", id);
-                command.ExecuteNonQuery();
-            }
-        }
+
+
+
 
         public void ImportCarsFromApi(List<Car> cars)
         {
