@@ -35,8 +35,7 @@ namespace Exercise04.Services
 
         public void UpdatePassport(int travelerId, string newPassportNumber)
         {
-            if (string.IsNullOrWhiteSpace(newPassportNumber))
-                throw new ArgumentException("Passport number cannot be empty");
+            
 
             _passportRepo.UpdatePassport(travelerId, newPassportNumber);
         }

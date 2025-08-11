@@ -17,11 +17,7 @@ namespace Exercise04.Repositories
         public void AddPassport(int travelerId, string passportNumber)
         {
             var traveler = _context.Travellers.FirstOrDefault(t => t.Id == travelerId);
-            if (traveler == null)
-            {
-                Console.WriteLine("traveler not found");
-                return;
-            }
+           
 
             var passport = new Passport
             {

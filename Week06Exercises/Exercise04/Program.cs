@@ -9,17 +9,16 @@ optionsBuilder.UseMySQL("server=localhost;user=root;password=9370;database=Exerc
 
 var context = new AppDbContext(optionsBuilder.Options);
 
-// Ensure database is created
 context.Database.EnsureCreated();
 
-// Repositories
 var travelerRepo = new TravelRepository(context);
 var destinationRepo = new DestinationRepository(context);
 var passportRepo = new PassportRepository(context);
 var guideRepo = new GuideRepository(context);
 var tourRepo = new TourRepository(context);
 
-// Services
+//Services
+
 var travelerService = new TravelerService(travelerRepo);
 var passportService = new PassportService(passportRepo, travelerRepo);
 var travelerDestinationService = new TravelerDestinationService(travelerRepo, destinationRepo);
@@ -29,85 +28,83 @@ var tourService = new TourService(tourRepo);
 
 while (true)
 {
-    Console.WriteLine("\n=== TRAVEL AGENCY MENU ===");
+    Console.WriteLine("\n=== Travel AGENCY MENU====");
     Console.WriteLine("1. Add Traveler");
-    Console.WriteLine("2. Assign Passport to Traveler");
-    Console.WriteLine("3. Assign Destination to Traveler");
-    Console.WriteLine("4. Show All Travelers");
-    Console.WriteLine("5. Add Destination");
-    Console.WriteLine("6. Show All Destinations");
-    Console.WriteLine("7. Add Guide");
+    Console.WriteLine("2.Assign Passport to Traveler");
+    Console.WriteLine("3.Assign Destination to Traveler");
+    Console.WriteLine("4.Show all Travelers");
+    Console.WriteLine("5.Add Destination");
+    Console.WriteLine("6.Show all Destinations");
+    Console.WriteLine("7.Add Guide");
     Console.WriteLine("8. Add Tour for Guide");
-    Console.WriteLine("9. Show All Tours");
-    Console.WriteLine("0. Exit");
-    Console.Write("Enter your choice: ");
+    Console.WriteLine("9.Show all Tours");
+    Console.WriteLine("0.Exit");
+    Console.Write("Enter your choice:");
 
     string choice = Console.ReadLine();
     Console.WriteLine();
 
+
     switch (choice)
     {
         case "1":
-            Console.Write("Traveler full name: ");
+            Console.Write("Traveler full name:");
             string fullName = Console.ReadLine();
             travelerService.AddTraveler(fullName);
-            Console.WriteLine("Traveler added.");
+            Console.WriteLine("Traveler Added.");
             break;
 
         case "2":
-            Console.Write("Traveler ID: ");
+            Console.Write("Traveler ID:");
             int travelerId = int.Parse(Console.ReadLine());
-            Console.Write("Passport Number: ");
+            Console.Write("Passport Number:");
             string passportNumber = Console.ReadLine();
             passportService.AssignPassport(travelerId, passportNumber);
-            Console.WriteLine("Passport assigned.");
+            Console.WriteLine("Passport Assigned");
             break;
 
         case "3":
-            Console.Write("Traveler ID: ");
+            Console.Write("Traveler ID:");
             int tid = int.Parse(Console.ReadLine());
-            Console.Write("Destination ID: ");
+            Console.Write("Destination Id:");
             int did = int.Parse(Console.ReadLine());
             travelerDestinationService.AssignDestination(tid, did);
-            Console.WriteLine("Destination assigned.");
+            Console.WriteLine("Destination Assigned");
             break;
 
         case "4":
             var travelers = travelerService.GetAllTravelers();
-            travelers.ForEach(t => Console.WriteLine($"{t.Id}: {t.FullName} - Passport: {t.Passport?.PassportNumber ?? "None"} - Destinations: {string.Join(", ", t.Destinations.Select(d => d.Name))}"));
+            travelers.ForEach(t => Console.WriteLine($"{t.Id}: {t.FullName} - Passport: {t.Passport.PassportNumber} -Destinations:{string.Join(",", t.Destinations.Select(d => d.Name))}"));
             break;
-
         case "5":
-            Console.Write("Destination name: ");
+            Console.Write("Destination name:");
             string destName = Console.ReadLine();
             destinationService.AddDestination(destName);
             Console.WriteLine("Destination added.");
             break;
-
         case "6":
             var destinations = destinationService.GetAllDestinations();
-            destinations.ForEach(d => Console.WriteLine($"{d.Id}: {d.Name}"));
+            destinations.ForEach(d => Console.WriteLine($"{d.Id} {d.Name}"));
             break;
 
         case "7":
-            Console.Write("Guide name: ");
+            Console.Write("Guide name:");
             string guideName = Console.ReadLine();
             guideService.AddGuide(guideName);
             Console.WriteLine("Guide added.");
             break;
 
         case "8":
-            Console.Write("Tour title: ");
+            Console.Write("Tour title:");
             string title = Console.ReadLine();
-            Console.Write("Guide ID: ");
+            Console.Write("Guide ID:");
             int gid = int.Parse(Console.ReadLine());
             tourService.AddTour(title, gid);
             Console.WriteLine("Tour added.");
             break;
-
         case "9":
             var tours = tourService.GetAllTours();
-            tours.ForEach(t => Console.WriteLine($"{t.Id}: {t.Title} - Guide: {t.Guide?.Name ?? "Unknown"}"));
+            tours.ForEach(t => Console.WriteLine($"{t.Id} {t.Title} -Guide: {t.Guide.Name}"));
             break;
 
         case "0":
@@ -115,7 +112,20 @@ while (true)
             return;
 
         default:
-            Console.WriteLine("Invalid choice. Try again.");
-            break;
+            Console.WriteLine("Invalid choice.Try again.");
+            break;      
+
+
+
+
+
+
+
+
+
+
     }
+
 }
+
+
