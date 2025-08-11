@@ -1,6 +1,6 @@
 namespace CTAndAI.CarReservationSystem.Models
 {
-    public class Reseervation
+    public class Reservation
     {
         public int Id { get; set; }
         public string CarId { get; set; }
