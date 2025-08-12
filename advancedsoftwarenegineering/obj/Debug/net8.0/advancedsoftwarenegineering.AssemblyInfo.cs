@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("advancedsoftwarenegineering")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85d91c5306b0176b8af218770aa188801913fd4f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66058c8d5c9b8499fe820f444089727c930d91d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("advancedsoftwarenegineering")]
 [assembly: System.Reflection.AssemblyTitleAttribute("advancedsoftwarenegineering")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

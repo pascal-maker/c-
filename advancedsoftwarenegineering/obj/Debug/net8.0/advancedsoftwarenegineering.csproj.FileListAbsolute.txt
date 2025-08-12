@@ -33,7 +33,6 @@
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.AssemblyInfo.cs
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.csproj.CoreCompileInputs.cache
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.sourcelink.json
-/Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.csproj.CopyComplete
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.dll
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/refint/advancedsoftwarenegineering.dll
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advancedsoftwarenegineering.pdb
@@ -41,3 +40,4 @@
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/ref/advancedsoftwarenegineering.dll
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/bin/Debug/net8.0/CsvHelper.dll
 /Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/pascal-maker/Desktop/c-/advancedsoftwarenegineering/obj/Debug/net8.0/advanced.EBBBDE4C.Up2Date
