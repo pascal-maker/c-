@@ -92,12 +92,6 @@ namespace CTAndAI.CarReservationSystem.Repositories
             return null;
         }
 
-
-
-
-
-
-
         public void ImportCarsFromApi(List<Car> cars)
         {
             // First clear existing cars
@@ -110,7 +104,17 @@ namespace CTAndAI.CarReservationSystem.Repositories
                 // Then insert new cars
                 foreach (var car in cars)
                 {
-                    AddCar(car);
+                    var command = new MySqlCommand(
+                        "INSERT INTO Cars (Id, Brand, Model, Year, PricePerDay, Electric, LicensePlate) VALUES (@Id, @Brand, @Model, @Year, @PricePerDay, @Electric, @LicensePlate)", 
+                        connection);
+                    command.Parameters.AddWithValue("@Id", car.Id);
+                    command.Parameters.AddWithValue("@Brand", car.Brand);
+                    command.Parameters.AddWithValue("@Model", car.Model);
+                    command.Parameters.AddWithValue("@Year", car.Year);
+                    command.Parameters.AddWithValue("@PricePerDay", car.PricePerDay);
+                    command.Parameters.AddWithValue("@Electric", car.Electric);
+                    command.Parameters.AddWithValue("@LicensePlate", car.LicensePlate);
+                    command.ExecuteNonQuery();
                 }
             }
         }

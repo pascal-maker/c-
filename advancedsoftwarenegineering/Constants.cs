@@ -1,4 +1,4 @@
-namespace CtAndAi.CarReservationSystem
+namespace CTAndAI.CarReservationSystem
 {
     public static class Constants
     {

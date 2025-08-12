@@ -5,6 +5,7 @@ namespace CTAndAI.CarReservationSystem.Repositories
         List<Car> GetAllCars();
         List<Car> GetElectricCars();
         Car GetCarById(int id);
+
         void ImportCarsFromApi(List<Car> cars);
     }
-} 
+}
