@@ -1,0 +1,15 @@
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net7.0/firstproject
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net7.0/firstproject.deps.json
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net7.0/firstproject.runtimeconfig.json
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net7.0/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/bin/Debug/net7.0/firstproject.pdb
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.AssemblyInfoInputs.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.AssemblyInfo.cs
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.csproj.CoreCompileInputs.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/refint/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.pdb
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.genruntimeconfig.cache
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/ref/firstproject.dll
+/Users/dieterdepreester/Documents/Source/Howest/asi/demos-asi/week-01-intro/firstproject/obj/Debug/net7.0/firstproject.sourcelink.json

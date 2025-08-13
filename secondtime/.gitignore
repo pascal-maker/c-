@@ -1,0 +1,9 @@
+# .NET/IDE
+.DS_Store
+bin/
+obj/
+*/bin/
+*/obj/
+TestResults/
+.vs/
+.idea/
