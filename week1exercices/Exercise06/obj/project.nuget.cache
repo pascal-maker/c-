@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "k1EDXC6/RH5QmdXcazVdMLnH374yFuxubpv3GVM0amxzWQCK+dFMLjdtx/3v7lkZfgW7vVxqxrWp2RSFOgPDXQ==",
+  "dgSpecHash": "9NqLYCKbAis=",
   "success": true,
   "projectFilePath": "/Users/pascal-maker/Desktop/c-/week1exercices/Exercise06/Exercise06.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/pascal-maker/.nuget/packages/microsoft.netcore.app.ref/8.0.19/microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
+    "/Users/pascal-maker/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.19/microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512",
+    "/Users/pascal-maker/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.19/microsoft.netcore.app.host.osx-arm64.8.0.19.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,37 +1,52 @@
-﻿Dictionary<string, List<int>> dict_aankopen = new Dictionary<String, List<int>>();
+﻿using System;
+Dictionary<string, List<int>> dict_aankopen = new Dictionary<String, List<int>>();
 dict_aankopen.Add("jan", new List<int>() { 100, 50, 20 });
 dict_aankopen.Add("piet", new List<int>() { 10, 70, 20, 4, 58, 542 });
 dict_aankopen.Add("karel", new List<int>() { 9 });
 dict_aankopen.Add("sandra", new List<int>() { 45, 45, 10 });
+//voorbeeldcode
+//we gaan nu de shoppingbaskets gaan bepalen onze functi emet de tresholds
 
+var ClientCount = GetExpensiveShoppingBaskets(dict_aankopen, 200);
+//vervolgens printen we de klanten met geld die de treshold 
 
-var aankopenCount =  GetExpensiveShoppingBaskets(dict_aankopen, 200);
-PrintaankopenCount(aankopenCount);
+PrintclientCount(ClientCount);
 
-static List<string> GetExpensiveShoppingBaskets(Dictionary<string, List<int>> dict_aankopen, int treshold)
-{ 
+// een klant is rijk als die meer dan 200 in treshold value efft
+//dus als portefeuille >= (treshold = 200)
 
-    var aankopenCount = new List<string>();
-    foreach ( var aankoop in dict_aankopen)
-    {
-        int totalValue = aankoop.Value.Sum();
-        if (totalValue > treshold)
-        {
-            aankopenCount.Add(aankoop.Key);
-        }
-
-
-    }
-    
-   return aankopenCount;
-}
-
-
-static void PrintaankopenCount(List<string> aankopenCount)
+static List<string> GetExpensiveShoppingBaskets(Dictionary<string,List<int>> dict_aankopen, int treshold)
 {
-    Console.WriteLine("Customers who shopping exceeds the threshold are:");
-    foreach (var aankoop in aankopenCount)
+    //lijstmetklantendiegenoeggeldhebben
+    var ClientCount = new List<string>();
+    //doorloop elke klant
+
+    foreach (var aankoop in dict_aankopen)
     {
-        Console.WriteLine($"{aankoop}");
+        //vooorwaarde klant rijk genoeg
+
+        int klantuitgaven = aankoop.Value.Sum();
+        if (klantuitgaven > treshold)
+        {
+            ClientCount.Add(aankoop.Key);
+        }
+        else
+        {
+            Console.WriteLine($"  Klant bereikt de treshold niet");
+        }
+    }
+    ClientCount.Sort();
+    //klanten mooi terugggeven
+    return ClientCount;
+    //en retourneren
+}
+
+static void PrintclientCount(List<string> ClientCount)
+// print de klanten uit die ana treshold voldoen
+{
+    foreach (var entry in ClientCount)
+    {
+        Console.WriteLine($"The client {entry} exceeds the treshold ");
     }
 }
+
