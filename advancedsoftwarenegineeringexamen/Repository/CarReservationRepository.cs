@@ -20,7 +20,7 @@ namespace CTAndAI.CarReservationSystem.Repositories
             {
                 connection.Open();
                 var command = new MySqlCommand("SELECT * FROM CarReservations", connection);
-                using (var reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader()) //exceitreredaer alleen gebruken bij select wegens waarden neit buiten db query
                 {
                     while (reader.Read())
                     {
@@ -64,21 +64,22 @@ namespace CTAndAI.CarReservationSystem.Repositories
             }
             return null;
         }
-
+        
+        //parsen gebeurt altijd in de repositry dus de klassen waarmee delete add of booking doen is de classe waarin iwe inde repistory gaan parsenene panning maken dus we boeken een reservaire lapop of auto gebeurt dit altijd heir in derepsitory addvalue is altijd bij ado net
         public void AddReservation(CarReservation reservation)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new MySqlCommand(
-                    "INSERT INTO CarReservations (CarId, CustomerName, Duration, Cost, ElectricRequired) VALUES (@CarId, @CustomerName, @Duration, @Cost, @ElectricRequired)", 
+                    "INSERT INTO CarReservations (CarId, CustomerName, Duration, Cost, ElectricRequired) VALUES (@CarId, @CustomerName, @Duration, @Cost, @ElectricRequired)",
                     connection);
                 command.Parameters.AddWithValue("@CarId", reservation.CarId);
                 command.Parameters.AddWithValue("@CustomerName", reservation.CustomerName);
                 command.Parameters.AddWithValue("@Duration", reservation.Duration);
                 command.Parameters.AddWithValue("@Cost", reservation.Cost);
                 command.Parameters.AddWithValue("@ElectricRequired", reservation.ElectricRequired);
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();//gebriken we bij update inser t wgens niet ind e databse erbijbuiten
             }
         }
 
