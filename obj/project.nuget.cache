@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2vm+79/5bsTN4ngPggvqAIwvmmqRllniM+FMOQAhPopRAYU5GI7JCenkPBoSDSz3jeQsihee7yXJnXCn1IJ6KQ==",
+  "dgSpecHash": "1tWn3mH5oME=",
   "success": true,
   "projectFilePath": "/Users/pascal-maker/Desktop/c-/firstproject.csproj",
   "expectedPackageFiles": [
@@ -55,7 +55,10 @@
     "/Users/pascal-maker/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/pascal-maker/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/pascal-maker/.nuget/packages/system.windows.extensions/4.7.0/system.windows.extensions.4.7.0.nupkg.sha512",
-    "/Users/pascal-maker/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512"
+    "/Users/pascal-maker/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512",
+    "/Users/pascal-maker/.nuget/packages/microsoft.netcore.app.ref/8.0.19/microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
+    "/Users/pascal-maker/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.19/microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512",
+    "/Users/pascal-maker/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.19/microsoft.netcore.app.host.osx-arm64.8.0.19.nupkg.sha512"
   ],
   "logs": []
 }

@@ -21,7 +21,10 @@ namespace Exercise04.Data
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        // n EF Core is ModelBuilder een hulpmiddel om je database schema te configureren vanuit code.
 
+//Het wordt gebruikt in OnModelCreating (in je DbContext) om dingen te doen zoals:Tabellen een naam gevenstellen (one-to-many, many-to-many)Constraints instellenSeed data toevoegen
+        // This method is called by the runtime to configure the model and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -43,7 +46,7 @@ namespace Exercise04.Data
             .WithMany(g => g.Tours)
             .HasForeignKey(t => t.GuideId);
 
-            
+
 
 
 
