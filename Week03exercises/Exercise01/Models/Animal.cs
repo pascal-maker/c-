@@ -1,36 +1,21 @@
-namespace Ct.Ai.Models
+namespace animals.models;
 
+public class Animal
 {
-    public class Animal
+    public string Name { get; set; }
+
+    public int Age { get; set; }
+
+
+    public Animal(string name, int age)
     {
-        public string Name { get; set; }
-
-        public int Age { get; set; }
-
-
-        public Animal(string name, int age)
-        {
-            Name = name;
-            Age = age;
-
-        }
-
-
-
-        public override string ToString()
-        {
-            return $" {Age}, {Name}";
-        }
-
-
-        public  virtual string MakeSound()
-        {
-            return  "Unknown Sound";
-        }
-
-
-
-
-
+        Name = name;
+        Age = age;
     }
-}   
+
+
+    public virtual void  MakeSound()
+    {
+        Console.WriteLine("unknown sound");
+    }
+}
