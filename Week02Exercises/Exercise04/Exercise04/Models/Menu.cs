@@ -156,6 +156,23 @@ public class Menu                                         // Definieert de Menu-
         Console.WriteLine("Course added to student");         // Bevestiging
     }
 
+
+// Controleer of de dictionary studentCourses al een entry heeft voor deze student.
+// Dictionary<Student, List<Course>> betekent:
+//   Key   = Student
+//   Value = Lijst van alle courses die de student volgt.
+//
+// ContainsKey(selectedStudent) kijkt of er al een lijst bestaat voor deze student.
+// Het ! (NOT) betekent: als er géén lijst bestaat voor deze student...
+    // ...maak dan een nieuwe lege lijst aan en koppel die aan deze student in de dictionary.
+   
+
+// Voeg de gekozen course toe aan de lijst van deze student.
+// We weten zeker dat de lijst bestaat (omdat we die zojuist hebben aangemaakt als dat nodig was).
+
+// Laat in de console weten dat de course succesvol is toegevoegd aan de student.
+
+
     private void ListStudents()                               // Toont alle studenten en laat eventueel één kiezen
     {
         if (students.Count == 0)                              // Geen studenten aanwezig?
