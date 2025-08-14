@@ -1,26 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Ct.Ai.Models; // import the namespace
+﻿using Pascal.Models;
 
-class People
+Person p1 = new Person("pascal", "musabyimana", 24, "gerard willemotlaan30", "pascal-musa@hotmail.com", "0456180134");
+Person p2 = new Person("joseph", "musabyimana", 24, "gerard willemotlaan30", "pascal-musa@hotmail.com", "04549488");
+p1.Introduce("pascal", "musabyimana", 24, "gerard willemotlaan30", "pascal-musa@hotmail.com", "0456180134");
+p2.Introduce("joseph", "musabyimana", 24, "gerard willemotlaan30", "pascal-musa@hotmail.com", "04549488");
+
+List<Person> people = new List<Person> { p1, p2 };
+foreach (var person in people)
 {
-    static void Main(string[] args)
-    {
-        // Way 1: Normal constructor initialization
-        Person p1 = new Person("Pascal", "Musabyimana", 24, "Gerard Willemotlaan 30, 9000 Gent, Belgium", 
-                               "pascal-musa@hotmail.com", "0456180134");
-
-        // Way 2: Object initializer (without custom constructor)
-        Person p2 = new Person("John", "Doe", 30, "123 Main St, Apt 4B, 12345, Exampleville, Countryland", 
-                               "john.doe@example.com", "(123) 456-7890");
-
-        // Store in a list
-        List<Person> people = new List<Person> { p1, p2 };
-
-        // Iterate and display info
-        foreach (var person in people)
-        {
-            person.Introduce();
-        }
-    }
+    Console.WriteLine($" {person}");
 }
