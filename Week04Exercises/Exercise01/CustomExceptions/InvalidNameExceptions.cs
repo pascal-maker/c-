@@ -1,4 +1,4 @@
-namespace Ct.Ai.Models.Exceptions;
+namespace smartphones.Exceptions;
 
 
 public class InvalidNameException : Exception

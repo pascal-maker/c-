@@ -1,50 +1,76 @@
-using Ct.Ai.Models;
-using Ct.Ai.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+// Import the SmartPhone model to use in this service
+using smartphones.models;
+// Import the repository interface to use dependency injection
+using smartphones.Repositories;
 
-namespace Ct.Ai.Services
+// Define the namespace for service implementations
+namespace smartphones.Services;
+
+// Implement the ISmartPhoneService interface
+// This class contains the business logic for smartphone operations
+// It acts as an intermediary between the UI (Program.cs) and the data layer (Repository)
+public class SmartPhoneService : ISmartPhoneService
 {
-    public class SmartPhoneService
+    // Private field to store the repository instance
+    // This is injected through the constructor (dependency injection)
+    // readonly means this field can only be set once (in the constructor)
+    private readonly ISmartPhoneRepository _smartphoneRepository;
+
+    // Constructor that takes a repository as a parameter
+    // This is called dependency injection - the service depends on the repository
+    // The repository is passed from outside (Program.cs) rather than created inside
+    public SmartPhoneService(ISmartPhoneRepository smartphoneRepository)
     {
-        private readonly SmartPhoneRepository _repo; // Use Ct.Ai.Repositories.SmartPhoneRepository
-
-        public SmartPhoneService(SmartPhoneRepository repo) // Correct type
-        {
-            _repo = repo;
-        }
-        // private readonly SmartphoneRepository _repo; stores fixed reference to the repository the service can call it later. the constuctor receives the repository from outside instead of creating it inside the service use all service methods call_repo to actually read/write data
-
-        public List<Smartphone> GetAll() => _repo.GetSmartphones();
-
-        public List<Smartphone> Search(string keyword)
-        {
-            return _repo.GetSmartphones()
-                .Where(s => s.Brand.Contains(keyword, StringComparison.OrdinalIgnoreCase)
-                         || s.Type.Contains(keyword, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
-
-        //**Summary of the Smartphone Search Method**
-
-        //The method searches for smartphones in a repository by **brand** or **type** using the following steps:
-        //1. **Retrieve Data**: Calls `_repo.GetSmartphones()` to fetch all smartphones from a CSV file as a list of `Smartphone` objects.
-        //2. **Filter Results**: Uses `.Where(...)` to filter the list, keeping only smartphones where the **brand** or **type** contains the search keyword (case-insensitive).
-        //3. **Return List**: Converts the filtered results to a `List<Smartphone>` using `.ToList()` for easy use by the caller.
-
-        //**Example**: Searching for `"iPhone"` returns all smartphones where the brand or type contains `"iPhone"` (ignoring case).
-
-
-        public void Add(Smartphone phone)
-        {
-            var all = _repo.GetSmartphones();
-            phone.Id = all.Max(p => p.Id) + 1;
-            _repo.AddSmartphone(phone);
-        }
+        // Store the injected repository in the private field
+        _smartphoneRepository = smartphoneRepository;
     }
-      
 
-      //It gets all smartphones, determines the next available ID, assigns it to the new smartphone, and then saves it.
-    
+    // Implementation of GetSmartPhones method
+    // This method delegates directly to the repository
+    // In a real application, you might add business logic here like filtering, sorting, or caching
+    public List<SmartPhone> GetSmartPhones()
+    {
+        // Call the repository method and return the result
+        return _smartphoneRepository.GetSmartPhones();
+    }
+
+    // Implementation of GetSmartPhoneById method
+    // This method delegates to the repository but could include additional business logic
+    public SmartPhone? GetSmartPhoneById(int id)
+    {
+        // Call the repository method and return the result
+        // The ? in the return type allows this method to return null
+        return _smartphoneRepository.GetSmartPhoneById(id);
+    }
+
+    // Implementation of AddSmartPhone method
+    // This method could include validation logic before delegating to the repository
+    public void AddSmartPhone(SmartPhone smartphone)
+    {
+        // In a real application, you might add validation here:
+        // - Check if smartphone is not null
+        // - Validate that required fields are not empty
+        // - Check if ID is unique
+        // - Validate price is positive
+        // - etc.
+
+        // For now, just delegate to the repository
+        _smartphoneRepository.AddSmartPhone(smartphone);
+    }
+
+    // Implementation of GetSmartPhoneByBrand method
+    // This method delegates to the repository
+    public SmartPhone? GetSmartPhoneByBrand(string brand)
+    {
+        // Call the repository method and return the result
+        return _smartphoneRepository.GetSmartPhoneByBrand(brand);
+    }
+
+    // Implementation of GetSmartPhoneByType method
+    // This method delegates to the repository
+    public SmartPhone? GetSmartPhoneByType(string type)
+    {
+        // Call the repository method and return the result
+        return _smartphoneRepository.GetSmartPhoneByType(type);
+    }
 }
