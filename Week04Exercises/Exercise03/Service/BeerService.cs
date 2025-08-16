@@ -1,34 +1,44 @@
-using Exercise03.Models;
-using Exercise03.Repositories;
+// Import the System namespace for basic functionality
 using System;
+// Import the System.Collections.Generic namespace for List<T>
 using System.Collections.Generic;
+// Import the System.Globalization namespace for CultureInfo
+using System.Globalization;
+// Import the System.IO namespace for file operations
+using System.IO;
+// Import the System.Linq namespace for LINQ operations
 using System.Linq;
+// Import the custom exceptions namespace
+using beer.Exceptions;
+// Import the beer models namespace
+using beer.Models;
 
-namespace Exercise03.Services
+// Import the beer repositories namespace
+using beer.Repositories;
+
+// Define the namespace for beer services
+namespace beer.Services
 {
+    // Define the BeerService class to handle beer business logic
     public class BeerService
     {
-        private readonly BeerRepository _repo; 
-
-        public BeerService(BeerRepository repo) 
+        // Private field to store the beer repository dependency
+        private readonly BeerRepository _repo;
+        // Constructor to initialize the service with a repository
+        public BeerService(BeerRepository repo)
         {
+            // Assign the provided repository to the private field
             _repo = repo;
         }
-        // private readonly SmartphoneRepository _repo; stores fixed reference to the repository the service can call it later. the constuctor receives the repository from outside instead of creating it inside the service use all service methods call_repo to actually read/write data
 
-         public List<Beer> GetAllBeers()
+        // Method to get all beers by delegating to the repository
+        public List<Beer> GetAllBeers()
         {
-            // Eventueel extra logica, maar hier volstaat:
+            // Return all beers from the repository
             return _repo.GetAllBeers();
         }
 
-        
+        // Empty line for spacing
 
-        
-
-      
     }
-      
-
-    
 }
