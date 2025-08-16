@@ -1,12 +1,24 @@
-using Ct.Ai.Models;
-using Ct.Ai.Repositories;
-namespace Ct.Ai.Repositories
-{
-    public interface IMediaRepository
-    {
-        void Add(IMedia media);
-        IMedia Get(string title);
-        List<IMedia> GetAll();
+// Import the media models namespace to use IMedia interface
+using media.models;
 
-    }
+// Define the namespace for media repositories
+namespace media.Repositories;
+
+// Empty line for spacing
+
+// Define the interface for media repository operations
+public interface IMediaRepository
+{
+
+     // Method to add a new media item to the repository
+     void Add(IMedia media);
+
+    // Method to get a media item by its title
+    IMedia Get(string title);
+
+    // Method to get all media items from the repository
+    List<IMedia> GetAll();
+
+    // Empty line for spacing
+
 }

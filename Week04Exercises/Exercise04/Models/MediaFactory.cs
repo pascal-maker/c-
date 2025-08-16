@@ -1,16 +1,26 @@
-namespace Ct.Ai.Models
+// Define the namespace for media models
+namespace media.models;
+
+// Define a static factory class for creating different types of media objects
+public static class MediaFactory
 {
-    public static class MediaFactory
+    // Static method to create media objects based on the media type string
+    public static IMedia Create(string mediaType)
     {
-        public static IMedia Create(string mediaType)
+        // Switch statement to handle different media types (case-insensitive)
+        switch (mediaType.ToLower())
         {
-            switch (mediaType.ToLowerInvariant())
-            {
-                case "movie":   return new Movie("Harry Potter", 152, "sci-fi", "James Cameron");
-                case "series":  return new Series("Prison Break", 90, "drama", "FOX");
-                case "podcast": return new Podcast("The Joe Rogan Experience", 2400, "Joe Rogan");
-                default: throw new ArgumentException("Unknown media type");
-            }
+            // Create and return a new Movie object with predefined values
+            case "movie": return new Movie("harrypotter", 120, "sky-fi", "jamescameron");
+            // Create and return a new Podcast object with predefined values
+            case "podcast": return new Podcast("joeroganpodcast", 240, "joerogan");
+            // Create and return a new Series object with predefined values
+            case "series": return new Series("prisonbreak", 250, "drama", "fox");
+            // Throw an exception for unknown media types
+            default: throw new ArgumentException("Unknown media type");
+
+            // Empty line for spacing
+
         }
     }
 }
