@@ -1,37 +1,23 @@
-using Ct.Ai.Models;
-using Ct.Ai.Repositories;
-namespace Ct.Ai.Repositories;
-
+// Importeer de models namespace om Artist en Concert klassen te gebruiken
+using Swagger.Models;
+// Importeer de repositories namespace voor interface definitie
+using Swagger.Repositories;
+// Definieer de namespace voor repository interfaces
+namespace Swagger.Repositories;
+// Definieer de interface voor artiest repository operaties
 public interface IArtistRepository
-{   
+{
+    // Methode om alle artiesten asynchroon op te halen
+    Task<List<Artist>> GetAllArtists();
 
+    // Methode om alle concerten asynchroon op te halen
+    Task<List<Concert>> GetAllConcerts();
 
-    // Deze methode haalt de artiest op aan de hand van zijn Id.
-// Omdat het een Task<Artist> teruggeeft, betekent dit dat het resultaat
-// pas later beschikbaar is (async) en dat we het moeten 'awaiten' bij gebruik.
+    // Lege regel voor spacing
 
-    Task<List<Artist>> GetArtists();
+    // Lege regel voor spacing
 
-   // Deze methode haalt de concerts op aan de hand van zijn Id.
-// Omdat het een Task<Concert> teruggeeft, betekent dit dat het resultaat
-// pas later beschikbaar is (async) en dat we het moeten 'awaiten' bij gebruik
-   
-    Task<List<Concert>> GetConcerts();
-
-   
-
-
-// Deze methode haalt alle Concert op die bij een bepaalde Artist horen.
-// Task<List<Concert>> betekent dat we een lijst van concerts krijgen,
-// maar pas zodra de async operatie (bv. database- of API-oproep) is afgerond.
+    // Methode om alle concerten voor een specifieke artiest asynchroon op te halen
     Task<List<Concert>> GetConcertForArtist(int ArtistID);
 
-
-
-
-
-
-    
-
 }
-

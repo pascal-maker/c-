@@ -1,35 +1,30 @@
-using System.Collections.Generic;     // Voor List<T>
-using System.Threading.Tasks;         // Voor Task<>
-using Ct.Ai.Models;                   // Voor Post en Comment
-// using Ct.Ai.Repositories;          // Alleen nodig in de implementatie, niet voor de interface
-// using Ct.Ai.Service;               // Niet nodig hier; zie namespace hieronder
+// Importeer System.Collections.Generic voor List<T> functionaliteit
+using System.Collections.Generic;
+// Importeer System.Threading.Tasks voor async/await functionaliteit
+using System.Threading.Tasks;
+// Importeer custom models voor Artist en Concert klassen
+using Swagger.Models;
 
-namespace Ct.Ai.Service
+// Definieer de namespace voor service interfaces
+namespace Swagger.Service
 {
-    /// <summary>
-    /// Service-laag voor het werken met Posts en hun Comments.
-    /// Async (Task/await) zodat IO-werk (HTTP/DB) niet blokkeert.
-    /// </summary>
+    // Definieer de interface voor todo artiest applicatie service operaties
     public interface ITodoArtistApplicationService
     {
-        /// <summary>
-        /// Haal ALLE artist.
-        /// Task<List<artist>> = "er komt later een lijst met artist" (async resultaat).
-        /// </summary>
-        Task<List<Artist>> GetArtists();
+        // Methode om alle artiesten asynchroon op te halen
+         Task<List<Artist>> GetAllArtists();
 
-        /// <summary>
-        /// Haal ALLE concerts.
-        /// Task<List<concers>> = "er komt later een lijst met concerts" (async resultaat).
-        /// </summary>
-        Task<List<Concert>> GetConcerts();
+        // Methode om alle concerten asynchroon op te halen
+         Task<List<Concert>> GetAllConcerts();
 
+        // Lege regel voor spacing
 
-        /// <summary>
-        /// haalt concerten op aan de hand van artist id 
-        /// </summary>
-        Task<List<Concert>> GetConcertForArtist(int ArtistID);
+        // Lege regel voor spacing
 
-        
+        // Methode om alle concerten voor een specifieke artiest asynchroon op te halen
+       Task<List<Concert>> GetConcertForArtist(int ArtistID);
+
     }
+    // Lege regel voor spacing
+
 }

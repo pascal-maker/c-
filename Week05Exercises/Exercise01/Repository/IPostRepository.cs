@@ -1,40 +1,30 @@
+// Import the models namespace to use Post and Comment classes
 using Ct.Ai.Models;
+// Import the repositories namespace for interface definition
 using Ct.Ai.Repositories;
+// Define the namespace for repository interfaces
 namespace Ct.Ai.Repositories;
-
+// Define the interface for post repository operations
 public interface IPostRepository
-{   
-
-
-    // Deze methode haalt een Post op aan de hand van zijn Id.
-// Omdat het een Task<Post> teruggeeft, betekent dit dat het resultaat
-// pas later beschikbaar is (async) en dat we het moeten 'awaiten' bij gebruik.
-
+{
+    // Method to retrieve all posts asynchronously
     Task<List<Post>> GetPosts();
 
-    // Deze methode voegt een nieuwe Post toe.
-// Het resultaat is ook een Task<Post> zodat de aanroepende code kan wachten
-// totdat de toevoeging klaar is en de toegevoegde Post wordt teruggegeven.
-   
-    Task<Post> GetPostById(int Id);
+    // Method to retrieve a specific post by ID asynchronously
+    Task<Post> GetPostById(int id);
 
-    // Deze methode voegt een nieuwe Post toe.
-// Het resultaat is ook een Task<Post> zodat de aanroepende code kan wachten
-// totdat de toevoeging klaar is en de toegevoegde Post wordt teruggegeven
-    Task<Post> AddPost(Post post);
+    // Method to add a new post asynchronously
+    Task <Post> AddPost(Post post);
 
+    // Method to retrieve all comments for a specific post asynchronously
+    Task<List<Comment>> GetCommentsForPost(int id);
 
-// Deze methode haalt alle Comments op die bij een bepaalde Post horen.
-// Task<List<Comment>> betekent dat we een lijst van comments krijgen,
-// maar pas zodra de async operatie (bv. database- of API-oproep) is afgerond.
-    Task<List<Comment>> GetCommentsForPost(int Id);
+    // Empty line for spacing
 
+    // Empty line for spacing
 
+    // Empty line for spacing
 
-
-
-
-    
+    // Empty line for spacing
 
 }
-

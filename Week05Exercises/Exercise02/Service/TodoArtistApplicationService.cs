@@ -1,58 +1,54 @@
-using System.Collections.Generic;     // Voor List<T>
-using System.Threading.Tasks;         // Voor Task<>
-using Ct.Ai.Models;                   // Voor Post en Comment
-using Ct.Ai.Repositories;             // Voor IPostRepository en PostRepository
-using Ct.Ai.Service;                   // Voor ITodoApplicationService
+// Importeer System.Collections.Generic voor List<T> functionaliteit
+using System.Collections.Generic;
+// Importeer System.Threading.Tasks voor async/await functionaliteit
+using System.Threading.Tasks;
+// Importeer custom models voor Artist en Concert klassen
+using Swagger.Models;
+// Importeer custom repositories namespace
+using Swagger.Repositories;
 
-namespace Ct.Ai.Service
+// Definieer de namespace voor service implementaties
+namespace Swagger.Service
 {
-    /// <summary>
-    /// De concrete implementatie van ITodoApplicationService.
-    /// Deze service praat met de PostRepository om data op te halen of te versturen.
-    /// </summary>
-    public class TodoArtistApplicationService : ITodoArtistApplicationService
+    // Definieer de TodoArtistApplicationService klasse die ITodoArtistApplicationService interface implementeert
+    public class TodoArtistApplicationService :  ITodoArtistApplicationService
     {
-        // Veld dat verwijst naar de repository voor Artist.
+        // Private readonly veld om de artiest repository dependency op te slaan
         private readonly IArtistRepository _artistRepository;
 
-        /// <summary>
-        /// Constructor - wordt aangeroepen wanneer je een TodoArtustApplicationService maakt.
-        /// Hier wordt een ArtustRepository instantie aangemaakt en opgeslagen in _postRepository.
-        /// </summary>
+        // Constructor om de service te initialiseren met een nieuwe repository instantie
         public TodoArtistApplicationService()
         {
+            // Maak een nieuwe ArtistRepository instantie voor data access
             _artistRepository = new ArtistRepository();
         }
 
-        /// <summary>
-        /// Haalt alle posts op via de repository.
-        /// De '=>' syntax betekent een korte methode die direct de repository aanroept.
-        /// await zorgt ervoor dat we wachten tot de async operatie klaar is.
-        /// </summary>
-        public async Task<List<Artist>> GetArtists()
+        // Implementatie van GetAllArtists methode om alle artiesten op te halen
+        public async Task<List<Artist>> GetAllArtists()
         {
-            return await _artistRepository.GetArtists();
+            // Delegeer de call naar de repository en retourneer het resultaat
+            return await _artistRepository.GetAllArtists();
         }
 
-        /// <summary>
-        /// Haalt een enkele post op aan de hand van een Id.
-        /// _postRepository.GetPostById(Id) doet het echte werk, deze service roept dat aan.
-        /// await zorgt dat het resultaat wordt teruggegeven zodra het klaar is.
-        /// </summary>
-         public async Task<List<Concert>> GetConcerts()
+        // Implementatie van GetAllConcerts methode om alle concerten op te halen
+         public async Task<List<Concert>> GetAllConcerts()
         {
-            return await _artistRepository.GetConcerts();
+            // Delegeer de call naar de repository en retourneer het resultaat
+            return await _artistRepository.GetAllConcerts();
         }
 
+        // Lege regel voor spacing
+
+        // Lege regel voor spacing
         
-
-        /// <summary>
-        /// Haalt alle comments op die horen bij een specifieke post (Id).
-        /// Wacht op de repository en geeft de lijst met comments terug.
-        /// </summary>
-        public async Task<List<Concert>> GetConcertForArtist(int ArtistID)
+        // Implementatie van GetConcertForArtist methode om concerten voor een specifieke artiest op te halen
+        public async Task<List<Concert>> GetConcertForArtist(int ArtistID) 
         {
+            // Delegeer de call naar de repository en retourneer het resultaat
             return await _artistRepository.GetConcertForArtist(ArtistID);
         }
+
+        // Lege regel voor spacing
+        
     }
 }

@@ -1,43 +1,82 @@
-﻿using System;                         // Nodig voor Console.WriteLine, enz.
-using System.Threading.Tasks;         // Nodig voor Task<> en async/await
-using Ct.Ai.Models;                   // Toegang tot Post en Comment klassen
-using Ct.Ai.Service;                  // Toegang tot TodoApplicationService interface & implementatie
+﻿// Import the System namespace for basic functionality
+using System;
+// Import the System.Threading.Tasks namespace for async/await functionality
+using System.Threading.Tasks;
+// Import the custom models namespace to use Post class
+using Ct.Ai.Models;
+// Import the custom service namespace to use TodoApplicationService
+using Ct.Ai.Service;
 
+// Define the Posts class to contain the main program
 public class Posts
 {
-    // Main is het startpunt van de applicatie
-    // async Task zorgt ervoor dat we await kunnen gebruiken in Main
+    // Define the main entry point as an async method
     public static async Task Main(string[] args)
     {
-        // Maak de service aan die met de API praat (onder water via PostRepository)
-        var todoService = new TodoApplicationService();
+        // Create a new instance of TodoApplicationService for handling business logic
+        var todoapplicationService = new TodoApplicationService();
 
-        // -------------------- ALLE POSTS OPHALEN --------------------
-        Console.WriteLine("\nFetching all posts..");  // Laat weten wat er gebeurt
-        var posts = await todoService.GetPosts();     // Wacht async tot alle posts zijn opgehaald
-        foreach (var post in posts)                   // Loop door elke post in de lijst
-            Console.WriteLine(post);                  // Toont de post (via ToString())
+        // Display a header for fetching all posts
+        Console.WriteLine("\n Fetching all posts..");
 
-        // -------------------- POST OP ID OPHALEN --------------------
-        Console.WriteLine("\nFetching post with ID 1..."); // Duidelijkere tekst dan "all posts"
-        var singlePost = await todoService.GetPostById(1); // Haalt één specifieke post op
-        Console.WriteLine(singlePost);                     // Toont deze ene post
+        // Call the service to get all posts asynchronously
+        var posts = await todoapplicationService.GetPosts();
+        // Iterate through each post and display it
+        foreach (var post in posts)
+            Console.WriteLine(post);
 
-        // -------------------- NIEUWE POST TOEVOEGEN --------------------
-        Console.WriteLine("\nAdding a new post");           // Statusbericht
-        var newPost = new Post                              // Maak nieuw Post-object
+        // Empty line for spacing
+
+        // Display a header for fetching a specific post
+        Console.WriteLine("\nfetching post with ID 1");
+        // Call the service to get a post with ID 1 asynchronously
+        var singlePost = await todoapplicationService.GetPostById(1);
+        // Display the retrieved post
+        Console.WriteLine(singlePost);
+
+        // Empty line for spacing
+
+        // Display a header for adding a new post
+        Console.WriteLine("\nAdding a new post");
+        // Create a new Post object with initial values
+        var newPost = new Post
         {
-            UserId = 1,                                     // ID van gebruiker
-            Title = "New Post",                             // Titel van de post
-            Body = "This is a new post"                     // Inhoud van de post
+            // Set the user ID to 1
+            UserId = 1,
+            // Set the title of the new post
+            Title = " New post",
+            // Empty line for spacing
+            // Set the body content of the new post
+            Body = "This a new post"
         };
-        var addedPost = await todoService.AddPost(newPost); // Stuur nieuwe post naar API
-        Console.WriteLine($"New post added: {addedPost}");  // Toon de toegevoegde post
 
-        // -------------------- COMMENTS VAN POST --------------------
-        Console.WriteLine("\nFetching comments for post ID 1..."); // Statusbericht
-        var comments = await todoService.GetCommentsForPost(1);    // Haal alle comments van post 1
-        foreach (var c in comments)                                // Loop door comments
-            Console.WriteLine(c);                                  // Toont elke comment
+        // Call the service to add the new post asynchronously
+        var addedPost = await todoapplicationService.AddPost(newPost);
+        // Display confirmation that the post was added
+        Console.WriteLine($" New post added {addedPost}");
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Display a header for fetching comments
+        Console.WriteLine("\nFetching  Comments for post Id....");
+        // Call the service to get comments for post with ID 1 asynchronously
+        var comments = await todoapplicationService.GetCommentsForPost(1);
+
+        // Iterate through each comment and display it
+        foreach (var c in comments)
+            Console.WriteLine(c);
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+        
     }
+    
 }
+

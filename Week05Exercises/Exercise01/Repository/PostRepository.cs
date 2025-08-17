@@ -1,68 +1,82 @@
+// Import System.Net.Http for HTTP client functionality
 using System.Net.Http;                     // Nodig voor HttpClient
+// Import System.Text for string encoding
 using System.Text;                          // Nodig voor Encoding
+// Import System.Threading.Tasks for async/await functionality
 using System.Threading.Tasks;               // Nodig voor Task<>
+// Import Newtonsoft.Json for JSON serialization/deserialization
 using Newtonsoft.Json;                      // Nodig voor JSON (JsonConvert)
+// Import custom models for Post and Comment classes
 using Ct.Ai.Models;                          // Voor Post en Comment klassen
-using Ct.Ai.Repositories;                    // Voor IPostRepository interface
+// Import custom repositories namespace
+using Ct.Ai.Repositories; 
 
+// Define the namespace for repository implementations
 namespace Ct.Ai.Repositories
 {
-    // Deze class implementeert IPostRepository en zorgt voor het ophalen/toevoegen van posts via HTTP requests
+    // Define the PostRepository class that implements IPostRepository interface
     public class PostRepository : IPostRepository
     {
-        // HttpClient wordt gebruikt om verbinding te maken met externe API's
+        // Private readonly field to store the HTTP client instance
         private readonly HttpClient _httpClient;
 
-        // Constructor: maakt een nieuwe HttpClient aan
+        // Constructor to initialize the repository with a new HTTP client
         public PostRepository()
         {
+            // Create a new HTTP client instance for making API calls
             _httpClient = new HttpClient();
         }
 
-        // Haalt ALLE posts op van de API
+        // Implementation of GetPosts method to retrieve all posts from the API
         public async Task<List<Post>> GetPosts()
         {
-            // Verstuur een GET-verzoek naar /posts en wacht op het antwoord (JSON string)
+            // Make an HTTP GET request to the posts endpoint and get the response as string
             var response = await _httpClient.GetStringAsync($"{Global.BASE_URL}/posts");
-
-            // Zet de JSON string om in een lijst van Post objecten
+            // Deserialize the JSON response into a List<Post> and return it
             return JsonConvert.DeserializeObject<List<Post>>(response)!;
         }
 
-        // Haalt één specifieke post op aan de hand van het ID
+        // Implementation of GetPostById method to retrieve a specific post by ID
         public async Task<Post> GetPostById(int Id)
         {
-            // Verstuur GET naar /posts/{Id}
+            // Make an HTTP GET request to the specific post endpoint and get the response as string
             var response = await _httpClient.GetStringAsync($"{Global.BASE_URL}/posts/{Id}");
-
-            // Zet JSON string om naar een Post object
+            // Deserialize the JSON response into a Post object and return it
             return JsonConvert.DeserializeObject<Post>(response)!;
         }
 
-        // Voegt een nieuwe post toe via POST request
+        // Implementation of AddPost method to create a new post via the API
         public async Task<Post> AddPost(Post post)
         {
-            // Zet het Post object om naar een JSON string
+            // Serialize the post object to JSON string
             var jsonContent = JsonConvert.SerializeObject(post);
 
-            // Maak een StringContent zodat we JSON kunnen versturen
+            // Create HTTP content with the JSON string, UTF-8 encoding, and JSON media type
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            // Verstuur POST naar /posts met de JSON content
+            // Make an HTTP POST request to the posts endpoint with the JSON content
             var response = await _httpClient.PostAsync($"{Global.BASE_URL}/posts", content);
 
-            // Lees de response body (JSON) en zet om naar een Post object
+            // Read the response content as string and deserialize it to a Post object
             return JsonConvert.DeserializeObject<Post>(await response.Content.ReadAsStringAsync())!;
+
+            // Empty line for spacing
+
         }
 
-        // Haalt alle comments op die bij een specifieke post horen
+        // Implementation of GetCommentsForPost method to retrieve comments for a specific post
         public async Task<List<Comment>> GetCommentsForPost(int Id)
         {
-            // Verstuur GET naar /posts/{Id}/comments
+            // Make an HTTP GET request to the comments endpoint for a specific post and get the response as string
             var response = await _httpClient.GetStringAsync($"{Global.BASE_URL}/posts/{Id}/comments");
-
-            // Zet JSON string om naar een lijst van Comment objecten
+            // Deserialize the JSON response into a List<Comment> and return it
             return JsonConvert.DeserializeObject<List<Comment>>(response)!;
         }
+
+        // Empty line for spacing
+
     }
+    
+    // Empty line for spacing
+
 }

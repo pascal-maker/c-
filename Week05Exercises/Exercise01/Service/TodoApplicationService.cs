@@ -1,65 +1,65 @@
-using System.Collections.Generic;     // Voor List<T>
-using System.Threading.Tasks;         // Voor Task<>
-using Ct.Ai.Models;                   // Voor Post en Comment
-using Ct.Ai.Repositories;             // Voor IPostRepository en PostRepository
-using Ct.Ai.Service;                   // Voor ITodoApplicationService
+// Import System.Collections.Generic for List<T> functionality
+using System.Collections.Generic;
+// Import System.Threading.Tasks for async/await functionality
+using System.Threading.Tasks;
+// Import custom models for Post and Comment classes
+using Ct.Ai.Models;
 
+// Define the namespace for service implementations
 namespace Ct.Ai.Service
 {
-    /// <summary>
-    /// De concrete implementatie van ITodoApplicationService.
-    /// Deze service praat met de PostRepository om data op te halen of te versturen.
-    /// </summary>
+    // Define the TodoApplicationService class that implements ITodoApplicationService interface
     public class TodoApplicationService : ITodoApplicationService
     {
-        // Veld dat verwijst naar de repository voor Posts.
-        private readonly IPostRepository _postRepository;
+        // Private field to store the post repository dependency
+        private IPostRepository _postRepository;
 
-        /// <summary>
-        /// Constructor - wordt aangeroepen wanneer je een TodoApplicationService maakt.
-        /// Hier wordt een PostRepository instantie aangemaakt en opgeslagen in _postRepository.
-        /// </summary>
+        // Constructor to initialize the service with a new repository instance
         public TodoApplicationService()
         {
+            // Create a new PostRepository instance for data access
             _postRepository = new PostRepository();
         }
 
-        /// <summary>
-        /// Haalt alle posts op via de repository.
-        /// De '=>' syntax betekent een korte methode die direct de repository aanroept.
-        /// await zorgt ervoor dat we wachten tot de async operatie klaar is.
-        /// </summary>
+        // Implementation of GetPosts method to retrieve all posts
         public async Task<List<Post>> GetPosts()
         {
+            // Delegate the call to the repository and return the result
             return await _postRepository.GetPosts();
         }
 
-        /// <summary>
-        /// Haalt een enkele post op aan de hand van een Id.
-        /// _postRepository.GetPostById(Id) doet het echte werk, deze service roept dat aan.
-        /// await zorgt dat het resultaat wordt teruggegeven zodra het klaar is.
-        /// </summary>
+        // Implementation of GetPostById method to retrieve a specific post by ID
         public async Task<Post> GetPostById(int Id)
         {
+            // Delegate the call to the repository and return the result
             return await _postRepository.GetPostById(Id);
         }
 
-        /// <summary>
-        /// Voegt een nieuwe post toe via de repository.
-        /// Het resultaat is de aangemaakte Post (mogelijk met een nieuw Id van de server).
-        /// </summary>
+        // Implementation of AddPost method to add a new post
         public async Task<Post> AddPost(Post post)
         {
+            // Delegate the call to the repository and return the result
             return await _postRepository.AddPost(post);
         }
 
-        /// <summary>
-        /// Haalt alle comments op die horen bij een specifieke post (Id).
-        /// Wacht op de repository en geeft de lijst met comments terug.
-        /// </summary>
-        public async Task<List<Comment>> GetCommentsForPost(int Id)
+        // Implementation of GetCommentsForPost method to retrieve comments for a specific post
+        public async Task<List<Comment>> GetCommentsForPost(int id)
         {
-            return await _postRepository.GetCommentsForPost(Id);
+            // Delegate the call to the repository and return the result
+            return await _postRepository.GetCommentsForPost(id);
         }
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
     }
 }

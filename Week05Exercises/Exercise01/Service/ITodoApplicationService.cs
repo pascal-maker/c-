@@ -1,38 +1,39 @@
-using System.Collections.Generic;     // Voor List<T>
-using System.Threading.Tasks;         // Voor Task<>
-using Ct.Ai.Models;                   // Voor Post en Comment
-// using Ct.Ai.Repositories;          // Alleen nodig in de implementatie, niet voor de interface
-// using Ct.Ai.Service;               // Niet nodig hier; zie namespace hieronder
+// Import System.Collections.Generic for List<T> functionality
+using System.Collections.Generic;
+// Import System.Threading.Tasks for async/await functionality
+using System.Threading.Tasks;
+// Import custom models for Post and Comment classes
+using Ct.Ai.Models;
 
+// Define the namespace for service interfaces
 namespace Ct.Ai.Service
 {
-    /// <summary>
-    /// Service-laag voor het werken met Posts en hun Comments.
-    /// Async (Task/await) zodat IO-werk (HTTP/DB) niet blokkeert.
-    /// </summary>
+    // Define the interface for todo application service operations
     public interface ITodoApplicationService
     {
-        /// <summary>
-        /// Haal ALLE posts op.
-        /// Task<List<Post>> = "er komt later een lijst met posts" (async resultaat).
-        /// </summary>
+        // Method to retrieve all posts asynchronously
         Task<List<Post>> GetPosts();
 
-        /// <summary>
-        /// Haal één post op aan de hand van zijn ID.
-        /// Retourneert een enkele Post (dus géén List).
-        /// </summary>
-        Task<Post> GetPostById(int Id);
+        // Method to retrieve a specific post by ID asynchronously
+        Task<Post> GetPostById(int id);
 
-        /// <summary>
-        /// Voeg een nieuwe post toe en geef de aangemaakte post terug
-        /// (incl. eventueel nieuw toegekend Id van de server).
-        /// </summary>
+        // Empty line for spacing
+
+        // Method to add a new post asynchronously
         Task<Post> AddPost(Post post);
 
-        /// <summary>
-        /// Haal alle comments op die bij een bepaalde post horen.
-        /// </summary>
-        Task<List<Comment>> GetCommentsForPost(int Id);
+        // Method to retrieve all comments for a specific post asynchronously
+        Task<List<Comment>> GetCommentsForPost(int id);
+         
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
+        // Empty line for spacing
+
     }
+    // Empty line for spacing
+
 }

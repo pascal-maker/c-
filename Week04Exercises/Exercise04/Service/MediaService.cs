@@ -1,5 +1,4 @@
 // Import the System.Runtime.CompilerServices namespace for compiler services
-using System.Runtime.CompilerServices;
 // Import the media models namespace to use IMedia interface
 using media.models;
 // Import the media repositories namespace to use IMediaRepository interface
