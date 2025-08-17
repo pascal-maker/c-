@@ -51,9 +51,9 @@
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.AssemblyInfo.cs
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.csproj.CoreCompileInputs.cache
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.sourcelink.json
-/Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.csproj.CopyComplete
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.dll
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/refint/Exercise04.dll
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.pdb
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.genruntimeconfig.cache
 /Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/ref/Exercise04.dll
+/Users/pascal-maker/Desktop/c-/Week06Exercises/Exercise04/obj/Debug/net8.0/Exercise04.csproj.Up2Date
