@@ -1,0 +1,15 @@
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/bin/Debug/net8.0/Exercise05
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/bin/Debug/net8.0/Exercise05.deps.json
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/bin/Debug/net8.0/Exercise05.runtimeconfig.json
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/bin/Debug/net8.0/Exercise05.dll
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/bin/Debug/net8.0/Exercise05.pdb
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.AssemblyInfoInputs.cache
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.AssemblyInfo.cs
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.csproj.CoreCompileInputs.cache
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.sourcelink.json
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.dll
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/refint/Exercise05.dll
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.pdb
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/Exercise05.genruntimeconfig.cache
+/Users/pascal-maker/Desktop/c-/week1exercices/Exercise05/obj/Debug/net8.0/ref/Exercise05.dll
