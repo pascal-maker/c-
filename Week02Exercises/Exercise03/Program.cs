@@ -1,12 +1,17 @@
-﻿using System.Net.Http.Headers;
-using music.Models;
-//creer object song
-Song b2 = new Song("heartless", 3);
-Song b1 = new Song("graduation", 4);
-//creer object album
-Album a1 = new Album("mybeautifuldarktwistefantasy", "kanyewest", "hiphop", "2010", new List<Song> { b1 });
-Album a2 = new Album ("mybeautifuldarktwistefantasy", "kanyewest", "hiphop", "2010", new List<Song> { b1,b2 });
-//creer object album
-//je moet een object van player creeren player heeft namelijk als parametrs songs ipv van die in te vullen  gebruik je player roep je Playsong aan vul je b2 je songs in 
+﻿using music.Models;
+using System.Collections.Generic;
+
+// Maak eerst song-objecten aan (elke song heeft een titel en een duur in minuten)
+Song b1 = new Song("Graduation", 4);
+Song b2 = new Song("Heartless", 3);
+
+// Maak album-objecten aan en voeg de songs toe via een List<Song>
+Album a1 = new Album("My Beautiful Dark Twisted Fantasy", "Kanye West", "HipHop", "2010", new List<Song> { b1 });
+Album a2 = new Album("My Beautiful Dark Twisted Fantasy", "Kanye West", "HipHop", "2010", new List<Song> { b1, b2 });
+
+// Maak een player-object aan (de "muziekspeler")
 Player player = new Player();
+
+// Gebruik de player om een specifiek nummer af te spelen
+// We geven b2 (Heartless) door als parameter
 player.PlaySong(b2);

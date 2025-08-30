@@ -1,55 +1,50 @@
 using System;
+using System.Collections.Generic;
+
 namespace Pascale.Models
 {
     public class Person
     {
+        // Eigenschappen van een persoon
         public string Name { get; set; }
-
         public string LastName { get; set; }
-
         public int Age { get; set; }
 
-        public  List<Addresse>  Addresses{ get; set; }
-        public List<string> EmailAdresses { get; set; }
-
+        // Elke persoon kan meerdere adressen, e-mails en telefoonnummers hebben
+        public List<Addresse> Addresses { get; set; }
+        public List<string> EmailAddresses { get; set; }
         public List<string> PhoneNumbers { get; set; }
 
-
-        public Person(string name, string lastname, int age, List<Addresse> addresses, List<string > emailadresses, List<string > phonenumbers)
+        // Constructor → maakt een nieuw persoon aan en vult alle gegevens in
+        public Person(string name, string lastname, int age, List<Addresse> addresses, List<string> emailaddresses, List<string> phonenumbers)
         {
             Name = name;
             LastName = lastname;
             Age = age;
             Addresses = addresses;
-            EmailAdresses = emailadresses;
+            EmailAddresses = emailaddresses;
             PhoneNumbers = phonenumbers;
         }
 
+        // ToString → zorgt ervoor dat Console.WriteLine(person) iets nuttigs toont
+        public override string ToString()
+        {
+            return $"Person: {Name} {LastName}, Age: {Age}";
+        }
 
-       public void Introduce()
-{
-    string addr = string.Join(" | ", Addresses ?? new());
-    string emails = string.Join(", ", EmailAdresses ?? new());
-    string phones = string.Join(", ", PhoneNumbers ?? new());
-    // Addresses ?? new()
-// If Addresses is not null, use it; otherwise use a new empty list.
-// This avoids a NullReferenceException.
+        // Introduce → laat de persoon zichzelf voorstellen
+        public void Introduce()
+        {
+            // string.Join → maakt van een lijst (List) één string met scheidingstekens ertussen
+            string addressesText = string.Join(" | ", Addresses);     // meerdere adressen gescheiden door |
+            string emailsText = string.Join(", ", EmailAddresses);    // meerdere e-mails gescheiden door ,
+            string phonesText = string.Join(", ", PhoneNumbers);      // meerdere telefoons gescheiden door ,
 
-// string.Join(" | ", ...)
-// Takes all items in the list and joins them into a single string separated by " | ".
-// If Addresses contains two Addresse objects, and since your Addresse class has a ToString() method,
-// it might produce: "gerard willemotlaan,24,9030 | youranus,69,666"
-
-
-    Console.WriteLine(
-        $"Hello, my name is {Name} and lastname {LastName} and age {Age}. " +
-        $"I live here; my address(es): {addr}. My email address(es): {emails}. " +
-        $"My phone number(s): {phones}."
-    );
-    Console.WriteLine();
-}
-
-
+            // Interpolatie → alle gegevens netjes in één zin
+            Console.WriteLine(
+                $"Hallo, mijn naam is {Name} {LastName}, ik ben {Age} jaar oud. " +
+                $"Adressen: {addressesText}. Emails: {emailsText}. Telefoons: {phonesText}"
+            );
+        }
     }
-
 }
