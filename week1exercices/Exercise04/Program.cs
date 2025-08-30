@@ -1,36 +1,63 @@
-﻿List<string> list_favorite_colors_children = new List<string>() { "green", "yellow", "pink", "blue", "red", "green", "pink", "yellow", "yellow", "black", "pink", "brown" };
-//we starten met onze list
-var colorCount = CountColors(list_favorite_colors_children);
-//we maken de varibale var colountcount aan is gelijk aan CountCOlors(list_favoirte_childeren) Countcolors is hier een methode naam
-PrintColorCounts(colorCount);
-//printfunvtie met als parameter colorCount
+﻿// We maken een lijst met favoriete kleuren van kinderen
+List<string> list_favorite_colors_children = new List<string>() 
+{ 
+    "green", "yellow", "pink", "blue", "red", 
+    "green", "pink", "yellow", "yellow", 
+    "black", "pink", "brown" 
+};
 
+// We roepen de methode CountColors aan en slaan het resultaat (dictionary) op in een variabele
+// "var" betekent dat de compiler zelf het type afleidt → hier wordt dat Dictionary<string,int>
+var colorCount = CountColors(list_favorite_colors_children);
+
+// We printen de dictionary netjes uit
+PrintColorCount(colorCount);
+
+
+
+// ---------------------------
+// Methode 1: CountColors
+// ---------------------------
 static Dictionary<string,int> CountColors(List<string> colors)
-//we maken een dictionary aan genaamnd COCuntcolor die besatat uit nse ist<string> colors
+// Returntype = Dictionary<string,int>
+// Methode = CountColors
+// Parameter = List<string> colors (onze kleurenlijst)
 {
-    var colorCount = new Dictionary<string, int>();
-    //onze variabele colorCOunt wordt dan een nieuw dicrinary<string,int>
-    // dan doen we voor elke kleur in de lisjt kleur van count colors 
+    // We maken een nieuwe lege dictionary aan
+    // Key   = string (de kleur, bv. "green")
+    // Value = int (hoe vaak die kleur voorkomt)
+    var colorCount = new Dictionary<string,int>();
+
+    // We gaan elke kleur uit de lijst overlopen
     foreach (var color in colors)
     {
+        // Als de kleur al in de dictionary bestaat → waarde verhogen met 1
         if (colorCount.ContainsKey(color))
             colorCount[color]++;
+
+        // Als de kleur er nog niet in zit → toevoegen met waarde 1
         else
             colorCount[color] = 1;
-
     }
-    return colorCount;
-    // onze variablele colorcunt is ene dtiicnary geworden dus die kan de jeu oprvagen in onze forloop genamad kleur al die er is dan dan tellen wecolorOCunr[color op anders wordt eht 1]
 
+    // Uiteindelijk returnen we de dictionary (alle kleuren met hun telling)
+    return colorCount;
 }
 
-static void PrintColorCounts(Dictionary<string,int> colorCount)
-// methode printcoloruntcouns aaanrpen die betatauti dciinary<string,int colorOCunt
+
+
+// ---------------------------
+// Methode 2: PrintColorCount
+// ---------------------------
+static void PrintColorCount(Dictionary<string,int> colorCount)
+// void → omdat we niets teruggeven, enkel afdrukken
+// Parameter = Dictionary<string,int> (de telling van kleuren)
 {
+    // We lopen elk element (key-value pair) van de dictionary af
     foreach (var entry in colorCount)
-    //foreach aaanropen in colorcount 
     {
-        Console.WriteLine($"The color {entry.Key} appears {entry.Value} time{(entry.Value > 1 ? "s" : "")}");
-        // printen key verschijtn zoveel keer mer waarden als entry.value>1 dn een dan krijgt time er een s bij of miet
+        // entry.Key = de kleur
+        // entry.Value = het aantal
+        Console.WriteLine($"The color {entry.Key} appears {entry.Value} time/times");
     }
 }

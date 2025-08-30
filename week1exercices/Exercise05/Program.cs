@@ -1,4 +1,5 @@
 ﻿// Voorbeelddata: lokaalcode -> capaciteit (aantal plaatsen)
+// We maken een dictionary: Key = lokaalcode (string), Value = capaciteit (int)
 Dictionary<string, int> locations = new Dictionary<string, int>
 {
     { "KWE.P.0.002", 200 },
@@ -9,64 +10,69 @@ Dictionary<string, int> locations = new Dictionary<string, int>
     { "KWE.A.1.301", 64 }
 };
 
-// We starten met het bepalen van de coronaproof lokalen voor groepen van 30 studenten
-// Let op: de naam 'classroomCount' is eigenlijk misleidend: dit is een lijst met lokaalcodes.
-// Beter: 'eligibleClassrooms' of 'coronaClassrooms'.
-//bepeaal alijd je varibale
+// We bepalen de coronaproof lokalen voor een groep van 30 studenten
+// Hier roepen we de methode DetermineCoronaClassrooms aan en geven
+// de dictionary + groepsgrootte (30) door als parameters
 var classroomCount = DetermineCoronaClassrooms(locations, 30);
 
-// Vervolgens printen we de gevonden lokalen
-//dan orintfuntie
+// We printen de gevonden coronaproof lokalen
 PrintclassroomCount(classroomCount);
 
+
+
+// ---------------------------
+// Methode 1: DetermineCoronaClassrooms
+// ---------------------------
 /// <summary>
 /// Bepaalt welke lokalen coronaproof zijn op basis van een groepsgrootte.
 /// Een lokaal is coronaproof als capaciteit >= (groupSize * 2).
 /// </summary>
-/// <param name="locations">Dictionary met lokaalcode (string) en capaciteit (int).</param>
-/// <param name="groupSize">Grootte van de groep studenten.</param>
-/// <returns>Gesorteerde lijst met lokaalcodes die voldoen.</returns>
 static List<string> DetermineCoronaClassrooms(Dictionary<string, int> locations, int groupSize)
 {
-    // Lijst die we zullen vullen met lokaalcodes die groot genoeg zijn
+    // We maken een lege lijst waarin we alle geschikte lokaalcodes gaan opslaan
     var classroomCount = new List<string>();
 
-    // Doorloop elk lokaal (Key = code, Value = capaciteit)
+    // Doorloop elk lokaal in de dictionary
+    // location.Key   = lokaalcode
+    // location.Value = capaciteit
     foreach (var location in locations)
     {
-        // Voorwaarde: lokaal is groot genoeg als capaciteit minstens 2x de groepsgrootte is de groote van de klas vinden we terug in de value
+        // Voorwaarde: lokaal is coronaproof als capaciteit minstens 2x de groepsgrootte is
         if (location.Value >= groupSize * 2)
         {
-            // Voeg de lokaalcode toe aan de resultaten we willend eklanamen dus de keu
+            // Als de capaciteit groot genoeg is → voeg de lokaalcode toe aan de lijst
             classroomCount.Add(location.Key);
         }
         else
         {
-            // Indien niet groot genoeg, geven we feedback in de console
-            // (opmerking: dit print voor elk te klein lokaal een lijn)
+            // Anders printen we een boodschap dat dit lokaal niet groot genoeg is
             Console.WriteLine($"Class '{location.Key}' is not big enough");
         }
     }
 
-    // Sorteer alfabetisch op lokaalcode voor consistente output
+    // We sorteren de lijst alfabetisch op lokaalcode voor overzicht
     classroomCount.Sort();
 
-    // Geef de lijst terug
+    // We geven de lijst terug naar de aanroeper
     return classroomCount;
 }
 
+
+
+// ---------------------------
+// Methode 2: PrintclassroomCount
+// ---------------------------
 /// <summary>
 /// Print alle coronaproof lokalen in de console.
 /// </summary>
-/// <param name="classroomCount">Lijst met lokaalcodes die voldoen.</param>
 static void PrintclassroomCount(List<string> classroomCount)
 {
-    // Doorloop elke lokaalcode en print een duidelijke boodschap
+    // Doorloop elke lokaalcode in de lijst en print een duidelijke boodschap
     foreach (var entry in classroomCount)
     {
         Console.WriteLine($"The class {entry} is corona proof");
     }
 
-    // (optioneel) Je zou hier ook kunnen printen hoeveel er gevonden zijn.
+    // Extra optie: printen hoeveel er gevonden zijn
     // Console.WriteLine($"Total corona-proof classrooms: {classroomCount.Count}");
 }
