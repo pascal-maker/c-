@@ -1,35 +1,37 @@
-namespace library.models                 // Namespace waarin de LibraryItem-klasse zich bevindt
+using System;
+
+namespace library.models
 {
-    // Basisklasse (superclass) voor alle bibliotheekitems zoals boeken, dvd's, etc.
+    /// <summary>
+    /// Basisklasse voor alle bibliotheekitems (boeken, dvd's, magazines, ...)
+    /// Deze class bevat gemeenschappelijke eigenschappen en methodes.
+    /// </summary>
     public class LibraryItem
     {
-        // Eigenschap voor het unieke ID van het bibliotheekitem
+        // Uniek ID van het item
         public int ID { get; set; }
 
-        // Eigenschap voor de titel van het item
+        // Titel van het item
         public string Title { get; set; }
 
-        // Eigenschap voor het publicatiejaar van het item
+        // Jaar van publicatie
         public int YearPublished { get; set; }
 
-        // Constructor voor LibraryItem
-        // Parameters:
-        //   id             -> Unieke identificatie van het item
-        //   title          -> Titel van het item
-        //   yearpublished  -> Jaar waarin het item is gepubliceerd
+        // Constructor → elke LibraryItem moet ID, Titel en Jaar hebben
         public LibraryItem(int id, string title, int yearpublished)
         {
-            ID = id;                       // Zet het ID
-            Title = title;                 // Zet de titel
-            YearPublished = yearpublished; // Zet het publicatiejaar
+            ID = id;
+            Title = title;
+            YearPublished = yearpublished;
         }
 
-        // Virtuele methode om de details van het item te printen.
-        // 'virtual' betekent dat afgeleide klassen (zoals Book of DVD)
-        // deze methode kunnen overschrijven (override) om extra details toe te voegen.
+        /// <summary>
+        /// Virtuele methode → kan overschreven worden in subklassen.
+        /// Standaard geeft hij basisinformatie van een item weer.
+        /// </summary>
         public virtual void PrintDetails()
         {
-            Console.WriteLine($"ID: {ID} Title: {Title}, Year: {YearPublished}");
+            Console.WriteLine($"ID: {ID}, Title: {Title}, Year: {YearPublished}");
         }
     }
 }

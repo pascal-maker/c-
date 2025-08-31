@@ -1,24 +1,29 @@
-namespace animals.models                 // Namespace waarin de Dog-klasse zich bevindt
+namespace animals.models
 {
-    // De Dog-klasse erft van de Animal-klasse (Dog is een type Animal)
+    /// <summary>
+    /// Dog is een subklasse (derived class) van Animal.
+    /// Ze erft alle eigenschappen (Name, Age) en methodes (MakeSound) van Animal.
+    /// </summary>
     public class Dog : Animal
     {
-        // Eigenschap (property) voor het ras van de hond
+        // Extra eigenschap specifiek voor honden
         public string Breed { get; set; }
 
-        // Constructor voor Dog
-        // Parameters: name (naam van de hond), age (leeftijd), breed (ras)
-        // De constructor roept de base-constructor van Animal aan met name en age
+        // Constructor van Dog:
+        // - We voegen zelf "breed" toe
+        // - We roepen de constructor van Animal aan via base(name, age)
         public Dog(string name, int age, string breed) : base(name, age)
         {
-            Breed = breed; // Stel de eigenschap Breed in met de waarde uit de parameter
+            Breed = breed;
         }
 
-        // Override van de virtuele methode MakeSound() uit de Animal-klasse
-        // Dit zorgt ervoor dat Dog een eigen geluid maakt
+        /// <summary>
+        /// Override van de virtuele methode uit Animal.
+        /// Elke hond zegt "Wooof" i.p.v. "unknown sound".
+        /// </summary>
         public override void MakeSound()
         {
-            Console.WriteLine("Wooof"); // Geluid van de hond
+            Console.WriteLine("Wooof");
         }
     }
 }

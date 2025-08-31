@@ -1,50 +1,53 @@
-// Abstracte klasse die de basis vormt voor alle verzamelobjecten
-// Implementeert IComparable zodat objecten gesorteerd kunnen worden
 public abstract class Collectible : IComparable
 {
-    // Eigenschap voor de naam van het object
-    public string Name { get; set; }
+    public string Name {get;set;}
 
-    // Eigenschap voor het jaar van oorsprong
-    public int YearOfOrigin { get; set; }
+    public int YearOfOrigin {get;set;}
 
-    // Eigenschap voor de prijs van het object
-    public double Price { get; set; }
+    public double Price {get;set;}
 
-    // Constructor die naam, jaar en prijs instelt
-    public Collectible(string name, int yearoforigin, double price)
+
+
+    public Collectible(string name,int yearoforigin,double price)
     {
-        Name = name;                 // Zet de naam
-        YearOfOrigin = yearoforigin; // Zet het jaar van oorsprong
-        Price = price;               // Zet de prijs
+        Name = name;
+        YearOfOrigin = yearoforigin;
+        Price = price;
     }
 
-    // Read-only eigenschap die de startbiedprijs berekent als 80% van de prijs
     public double StartBidPrice
     {
-        get { return Price * 0.80; } // Berekening startbod
+        get {return Price * 0.80;}
     }
 
-    // Abstracte eigenschap die het type van de collectie retourneert (wordt in subklassen ingevuld)
-    public abstract string CollectType { get; }
+    // Abstract property - MOET geïmplementeerd worden in subklassen (Coin, Stamp, etc.)
+    // Elke verzamelobject heeft een type (bijv. "Coin", "Stamp", "Card")
+    public abstract string CollectType {get;}
 
-    // Implementatie van CompareTo om op naam te sorteren
+    // CompareTo methode voor sortering van Collectible objecten
+    // Vergelijkt objecten op basis van hun naam (alfabetisch)
     public int CompareTo(object obj)
     {
-        // Controleer of het object ook een Collectible is
-        if (obj is Collectible other)
+        // Controleer of het object een Collectible is
+        if(obj is Collectible other)
         {
-            // Vergelijk op naam (alfabetisch)
+            // Vergelijk namen alfabetisch
+            // Return: -1 (kleiner), 0 (gelijk), +1 (groter)
             return this.Name.CompareTo(other.Name);
         }
 
-        // Foutmelding als het geen Collectible is
+        // Gooi exception als object geen Collectible is
         throw new ArgumentException("Object is not a name");
     }
 
-    // Virtuele ToString-methode die een stringrepresentatie teruggeeft
+    // Virtual ToString methode - kan overschreven worden in subklassen
+    // Maakt een mooie string representatie van het Collectible object
     public virtual string ToString()
     {
-        return $"Name {Name}, Year {YearOfOrigin}, Price: {Price}";
+        // String interpolatie voor nette weergave
+        return $"Name {Name},Year{YearOfOrigin},Price:{Price}";
     }
+
+
+
 }

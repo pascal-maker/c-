@@ -1,28 +1,24 @@
-﻿using library.models;  
-// Zorgt ervoor dat we de klassen uit de namespace "library.models" kunnen gebruiken,
-// zoals Book, Magazine, DVD en LibraryItem
+﻿using library.models;
 
-// Maak een Book-object met:
-// ID = 1, Titel = "harrypottergobletoffire", Jaar = 2004, Auteur = "j.k.rowling"
-Book b1 = new Book(1, "harrypottergobletoffire", 2004, "j.k.rowling");
+// Maak boeken aan
+Book b1 = new Book(1, "Harry Potter & Goblet of Fire", 2004, "J.K. Rowling");
+Book b2 = new Book(2, "Harry Potter & The Secret Chamber", 2008, "J.K. Rowling");
 
-// Maak een Magazine-object met:
-// ID = 1, Titel = "forbes", Jaar = 2024, Uitgavenummer = 12
-Magazine m1 = new Magazine(1, "forbes", 2024, 12);
+// Maak magazines aan
+Magazine m1 = new Magazine(1, "Forbes", 2008, 12);
+Magazine m2 = new Magazine(2, "Quote 500", 2023, 12);
 
-// Maak een DVD-object met:
-// ID = 1, Titel = "pornhub", Jaar = 2023, Duur = 2035 minuten (voorbeeldwaarde)
-DVD d1 = new DVD(1, "pornhub", 2023, 2035);
+// Maak DVD's aan
+DVD d1 = new DVD(1, "Cars", 2012, 300);
+DVD d2 = new DVD(2, "Mission Impossible", 2018, 400);
 
-// Maak een lijst van LibraryItem-objecten
-// We gebruiken de basisklasse LibraryItem zodat de lijst
-// objecten kan bevatten van elk type dat van LibraryItem erft (Book, Magazine, DVD)
-List<LibraryItem> librarythings = new List<LibraryItem> { b1, m1, d1 };
+// Alle items in één lijst stoppen (van type LibraryItem)
+// Dankzij polymorfisme kan een lijst van LibraryItem zowel Book, Magazine als DVD bevatten
+List<LibraryItem> librarythings = new List<LibraryItem> { b1, b2, m2, m1, d1, d2 };
 
-// Loop door elk item in de lijst en roep de PrintDetails()-methode aan
-// Dankzij polymorfisme zal voor elk object de juiste override van PrintDetails()
-// worden uitgevoerd, afhankelijk van het werkelijke type (Book, Magazine of DVD)
-foreach (var libraryitem in librarythings)
+// Voor elk item in de lijst → de juiste PrintDetails() methode wordt aangeroepen
+// (runtime polymorfisme: welke override hangt af van het werkelijke type)
+foreach (var librarything in librarythings)
 {
-    libraryitem.PrintDetails(); // Print de details van het huidige item
+    librarything.PrintDetails();
 }
