@@ -4,41 +4,42 @@ using Students.Management.Library.Models;
 // Define the namespace for service implementations
 namespace Students.Management.Library.Service;
 
-// Define the CourseManagement class to handle business logic for course and student operations
-// This class acts as the main service layer for the course management system
-// It manages the interaction between the user interface and the data layer
+/// <summary>
+/// CourseManagement - Service class voor het beheren van cursussen en studenten
+/// Verantwoordelijk voor alle business logic van het cursus management systeem
+/// Beheert de interactie tussen de user interface en de data layer
+/// </summary>
 public class CourseManagement
 {
-    // Private fields to store lists of students and courses in memory
-    // These lists are used for the current session and are initialized with sample data
+    // Private fields om lijsten van studenten en cursussen in memory op te slaan
+    // Deze lijsten worden gebruikt voor de huidige sessie
     private List<Student> _students;
     private List<Course> _courses;
 
-    // Constructor that initializes the CourseManagement service
-    // This sets up the initial data and prepares the system for use
+    /// <summary>
+    /// Constructor die de CourseManagement service initialiseert
+    /// Maakt lege lijsten aan voor studenten en cursussen
+    /// </summary>
     public CourseManagement()
     {
-        // Call the Init method to set up initial data
-        Init();
+        _students = new List<Student>();
+        _courses = new List<Course>();
     }
 
-    // Region to group all public methods that can be called from outside the class
-    #region Public
-
-    // Main menu method that displays the user interface and handles user interactions
-    // This is the entry point for the course management system
+    /// <summary>
+    /// Hoofdmenu methode die de user interface toont en user interacties afhandelt
+    /// Dit is het startpunt van het cursus management systeem
+    /// Toont een menu met alle beschikbare opties en blijft draaien tot exit
+    /// </summary>
     public void Menu()
     {
-        // Variable to store the user's menu choice
         int choice = 0;
-        
-        // Display the main title of the application
         Console.WriteLine("Course Management System");
 
-        // Main menu loop that continues until the user chooses to exit (choice = 99)
+        // Hoofdmenu loop die blijft draaien tot de gebruiker kiest om te stoppen (choice = 99)
         while (choice != 99)
         {
-            // Display all available menu options
+            // Toon alle beschikbare menu opties
             Console.WriteLine("1. Add Student");
             Console.WriteLine("2. Add Course");
             Console.WriteLine("3. Add Student to Course");
@@ -48,251 +49,226 @@ public class CourseManagement
             Console.WriteLine("7. Total course price student is enrolled in");
             Console.WriteLine("99. Exit");
             
-            // Read the user's choice and convert it to an integer
+            // Lees de keuze van de gebruiker en converteer naar integer
             choice = Convert.ToInt32(Console.ReadLine());
-            
-            // Call the ChooseAction method to handle the user's choice
             ChooseAction(choice);
         }
     }
 
-    // End of public region
-    #endregion
-
-    // Region to group all private methods that are used internally by the class
-    #region Private
-
-    // Method to handle the user's menu choice and execute the corresponding action
-    // This method uses a switch statement to route to the appropriate functionality
+    /// <summary>
+    /// Methode om de menu keuze van de gebruiker af te handelen
+    /// Gebruikt een switch statement om naar de juiste functionaliteit te routeren
+    /// </summary>
+    /// <param name="choice">De menu keuze van de gebruiker (1-7 of 99)</param>
     private void ChooseAction(int choice)
     {
-        // Switch statement to handle different menu choices
         switch (choice)
         {
             case 1:
-                // Call the method to add a new student
                 AddStudent();
                 break;
             case 2:
-                // Call the method to add a new course
                 AddCourse();
                 break;
             case 3:
-                // Call the method to enroll a student in a course
                 AddStudentToCourse();
                 break;
             case 4:
-                // Call the method to display all students
                 ListStudents();
                 break;
             case 5:
-                // Call the method to display all courses
                 ListCourses();
                 break;
             case 6:
-                // Call the method to display students in a specific course
                 ListStudentsInCourse();
                 break;
             case 7:
-                // Call the method to calculate total course price for a student
                 TotalPriceStudentIsEnrolledIn();
                 break;
             case 99:
-                // Display exit message and terminate the application
                 Console.WriteLine("Exiting");
                 Environment.Exit(0);
-                break;
-            default:
-                // Handle invalid menu choices (no action needed)
                 break;
         }
     }
 
-    // Method to calculate and display the total price of all courses a student is enrolled in
+    /// <summary>
+    /// Berekent en toont de totale prijs van alle cursussen waar een student is ingeschreven
+    /// Gebruikt LINQ Sum() methode voor efficiënte berekening
+    /// </summary>
     private void TotalPriceStudentIsEnrolledIn()
     {
-        // Display all students so the user can choose one
-        Console.WriteLine("Choose a student from the list by it's Id");
+        // Toon alle studenten zodat de gebruiker er een kan kiezen
+        Console.WriteLine("Choose a student from the list by its Id");
         _students.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Email: {s.Email}"));
         
-        // Read the student ID from user input and convert to integer
+        // Lees de student ID van user input en converteer naar integer
         int studentId = Convert.ToInt32(Console.ReadLine());
         
-        // Find the student with the specified ID
-        Student student = _students.Where(s => s.Id == studentId).FirstOrDefault();
+        // Zoek de student met de opgegeven ID
+        Student student = _students.FirstOrDefault(s => s.Id == studentId);
         
-        // Initialize total price variable
-        decimal totalPrice = 0;
-        
-        // Calculate the sum of all course prices for the student
-        student.Courses.ForEach(c => totalPrice += c.Price);
-        
-        // Display the total price to the user
-        Console.WriteLine($"Total price of courses: €{totalPrice}");
+        // Controleer of de student bestaat en bereken totale prijs
+        if (student != null)
+        {
+            // Gebruik LINQ Sum() om alle cursus prijzen op te tellen
+            decimal totalPrice = student.Courses.Sum(c => c.Price);
+            Console.WriteLine($"Total price of courses: €{totalPrice}");
+        }
+        else
+        {
+            Console.WriteLine("Student not found!");
+        }
     }
 
-    // Method to display all students enrolled in a specific course
+    /// <summary>
+    /// Toont alle studenten die ingeschreven zijn in een specifieke cursus
+    /// Zoekt eerst de cursus op basis van ID en toont dan alle ingeschreven studenten
+    /// </summary>
     private void ListStudentsInCourse()
     {
-        // Display all courses so the user can choose one
+        // Toon alle cursussen zodat de gebruiker er een kan kiezen
         _courses.ForEach(c => Console.WriteLine($"Id: {c.Id}, Name: {c.Name}, Price: {c.Price}"));
-        
-        // Prompt user to enter course ID
         Console.WriteLine("Enter Course Id");
         
-        // Read the course ID from user input and convert to integer
+        // Lees de cursus ID van user input en converteer naar integer
         int courseId = Convert.ToInt32(Console.ReadLine());
         
-        // Find the course with the specified ID
-        Course course = _courses.Where(c => c.Id == courseId).FirstOrDefault();
+        // Zoek de cursus met de opgegeven ID
+        Course course = _courses.FirstOrDefault(c => c.Id == courseId);
         
-        // Display all students enrolled in the selected course
-        course.Students.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Email: {s.Email}"));
+        // Controleer of de cursus bestaat en toon alle ingeschreven studenten
+        if (course != null)
+        {
+            course.Students.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Email: {s.Email}"));
+        }
+        else
+        {
+            Console.WriteLine("Course not found!");
+        }
     }
 
-    // Method to display all courses in the system
+    /// <summary>
+    /// Toont alle cursussen in het systeem
+    /// Loop door alle cursussen en toon hun informatie
+    /// </summary>
     private void ListCourses()
     {
-        // Loop through all courses and display their information
         foreach (Course course in _courses)
         {
-            // Display course ID, name, and price with proper formatting
             Console.WriteLine($"Id: {course.Id}, Name: {course.Name}, Price: €{course.Price}");
         }
     }
 
-    // Method to display all students in the system
+    /// <summary>
+    /// Toont alle studenten in het systeem
+    /// Loop door alle studenten en toon hun informatie
+    /// </summary>
     private void ListStudents()
     {
-        // Loop through all students and display their information
         foreach (Student student in _students)
         {
-            // Display student ID, name, and email
             Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, Email: {student.Email}");
         }
     }
 
-    // Method to enroll a student in a course
+    /// <summary>
+    /// Schrijft een student in voor een cursus
+    /// Voegt de cursus toe aan de student's cursus lijst en vice versa
+    /// Maakt een many-to-many relatie tussen student en cursus
+    /// </summary>
     private void AddStudentToCourse()
     {
-        // Display all students so the user can choose one
-        Console.WriteLine("Choose a student from the list by it's Id");
+        // Toon alle studenten zodat de gebruiker er een kan kiezen
+        Console.WriteLine("Choose a student from the list by its Id");
         _students.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Email: {s.Email}"));
         
-        // Read the student ID from user input and convert to integer
+        // Lees de student ID van user input
         int studentId = Convert.ToInt32(Console.ReadLine());
 
-        // Display all courses so the user can choose one
-        Console.WriteLine("Choose a course from the list by it's Id");
+        // Toon alle cursussen zodat de gebruiker er een kan kiezen
+        Console.WriteLine("Choose a course from the list by its Id");
         _courses.ForEach(c => Console.WriteLine($"Id: {c.Id}, Name: {c.Name}, Price: €{c.Price}"));
         
-        // Read the course ID from user input and convert to integer
+        // Lees de cursus ID van user input
         int courseId = Convert.ToInt32(Console.ReadLine());
 
-        // Find the student and course objects using their IDs
-        Student student = _students.Where(s => s.Id == studentId).FirstOrDefault();
-        Course course = _courses.Where(c => c.Id == courseId).FirstOrDefault();
+        // Zoek de student en cursus objecten op basis van hun IDs
+        Student student = _students.FirstOrDefault(s => s.Id == studentId);
+        Course course = _courses.FirstOrDefault(c => c.Id == courseId);
         
-        // Add the course to the student's course list
-        student.Courses.Add(course);
-        
-        // Add the student to the course's student list
-        course.Students.Add(student);
-        
-        // Display confirmation message
-        Console.WriteLine("Student added to course");
+        // Controleer of beide bestaan en voeg de relatie toe
+        if (student != null && course != null)
+        {
+            // Voeg de cursus toe aan de student's cursus lijst
+            student.Courses.Add(course);
+            
+            // Voeg de student toe aan de cursus's student lijst
+            course.Students.Add(student);
+            
+            Console.WriteLine("Student added to course!");
+        }
+        else
+        {
+            Console.WriteLine("Student or course not found!");
+        }
     }
 
-    // Method to add a new course to the system
+    /// <summary>
+    /// Voegt een nieuwe cursus toe aan het systeem
+    /// Vraagt gebruiker om naam en prijs, maakt een nieuw Course object
+    /// Auto-generates een ID op basis van het aantal bestaande cursussen
+    /// </summary>
     private void AddCourse()
     {
-        // Prompt user to enter course name
-        Console.WriteLine("Enter Course Name");
+        // Vraag gebruiker om cursus naam
+        Console.WriteLine("Enter Course Name:");
         string name = Console.ReadLine();
         
-        // Prompt user to enter course price
-        Console.WriteLine("Enter Course Price");
-        string strPrice = Console.ReadLine();
+        // Vraag gebruiker om cursus prijs
+        Console.WriteLine("Enter Course Price:");
+        decimal price = Convert.ToDecimal(Console.ReadLine());
         
-        // Convert the price string to decimal
-        decimal Price = Convert.ToDecimal(strPrice);
+        // Maak een nieuw Course object met object initializer syntax
+        Course course = new Course() 
+        { 
+            Id = _courses.Count + 1,  // Auto-generate ID
+            Name = name, 
+            Price = price,
+            Students = new List<Student>()  // Initialiseer lege student lijst
+        };
         
-        // Create a new course object with auto-generated ID
-        Course course = new Course() { Id = _courses.Count + 1, Name = name, Price = Price };
-        
-        // Add the new course to the courses list
+        // Voeg de nieuwe cursus toe aan de cursussen lijst
         _courses.Add(course);
+        Console.WriteLine("Course added successfully!");
     }
 
-    // Method to add a new student to the system
+    /// <summary>
+    /// Voegt een nieuwe student toe aan het systeem
+    /// Vraagt gebruiker om naam en email, maakt een nieuw Student object
+    /// Auto-generates een ID op basis van het aantal bestaande studenten
+    /// </summary>
     private void AddStudent()
     {
-        // Prompt user to enter student name
-        Console.WriteLine("Enter Student Name");
+        // Vraag gebruiker om student naam
+        Console.WriteLine("Enter Student Name:");
         string name = Console.ReadLine();
         
-        // Prompt user to enter student email
-        Console.WriteLine("Enter Student Email");
+        // Vraag gebruiker om student email
+        Console.WriteLine("Enter Student Email:");
         string email = Console.ReadLine();
         
-        // Create a new student object with auto-generated ID and empty course list
-        Student student = new Student() { Id = _students.Count + 1, Name = name, Email = email, Courses = new List<Course>() };
+        // Maak een nieuw Student object met object initializer syntax
+        Student student = new Student() 
+        { 
+            Id = _students.Count + 1,  // Auto-generate ID
+            Name = name, 
+            Email = email, 
+            Courses = new List<Course>()  // Initialiseer lege cursus lijst
+        };
         
-        // Add the new student to the students list
+        // Voeg de nieuwe student toe aan de studenten lijst
         _students.Add(student);
+        Console.WriteLine("Student added successfully!");
     }
-
-    // Method to initialize the system with sample data
-    // This method sets up the initial students and courses for demonstration purposes
-    private void Init()
-    {
-        // Initialize the students list with sample student data
-        _students = new List<Student>(){
-            // Create first sample student with ID 1
-            new Student(){
-                Id = 1, 
-                Name = "John", 
-                Email = "john@doe.com", 
-                Class = "A1", 
-                BirthDate = new DateOnly(2000,1,1), 
-                Courses = new List<Course>()
-            },
-            // Create second sample student with ID 2
-            new Student(){
-                Id = 2, 
-                Name = "Jane", 
-                Email = "jane@doe.com", 
-                Class = "B1", 
-                BirthDate = new DateOnly(2000,5,4),  
-                Courses = new List<Course>()
-            },
-        };
-
-        // Initialize the courses list with sample course data
-        _courses = new List<Course>(){
-            // Create sample courses with different IDs, names, and prices
-            new Course(){Id = 1, Name = "C#", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 2, Name = "Java", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 3, Name = "Python", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 4, Name = "JavaScript", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 5, Name = "C++", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 6, Name = "PHP", Price = 350M, Students = new List<Student>()},
-            new Course(){Id = 7, Name = "Ruby", Price = 150M, Students = new List<Student>()},
-            new Course(){Id = 8, Name = "Swift", Price = 250M, Students = new List<Student>()},
-        };
-
-        // Set up some initial enrollments for demonstration
-        // Enroll the first student (John) in the first three courses
-        _students[0].Courses.Add(_courses[0]);  // John enrolled in C#
-        _students[0].Courses.Add(_courses[1]);  // John enrolled in Java
-        _students[0].Courses.Add(_courses[2]);  // John enrolled in Python
-        
-        // Also add John to the students list of each course
-        _courses[0].Students.Add(_students[0]);  // C# has John as student
-        _courses[1].Students.Add(_students[0]);  // Java has John as student
-        _courses[2].Students.Add(_students[0]);  // Python has John as student
-    }
-
-    // End of private region
-    #endregion
 }
