@@ -18,49 +18,69 @@ class Movies
         // Create a new instance of MediaService and inject the repository
         var service = new MediaService(repo);
 
-        // Create a movie using the MediaFactory
-        var m1 = MediaFactory.Create("movie");
-        // Create a series using the MediaFactory
-        var s1 = MediaFactory.Create("series");
-        // Create a podcast using the MediaFactory
-        var p1 = MediaFactory.Create("podcast");
+        Console.WriteLine("=== Media Management System ===\n");
 
-        // Create a movie directly using the Movie constructor
-        var m2 = new Movie("dune", 155, "Sci-fi", "dennis villeneuve");
+        // Demo 1: Create media with specific parameters (geen hardcoded waarden!)
+        Console.WriteLine("1. Creating media with specific parameters:");
+        var m1 = MediaFactory.CreateMovie("The Matrix", 136, "Sci-Fi", "Wachowski Sisters");
+        var s1 = MediaFactory.CreateSeries("Breaking Bad", 62, "Drama", "AMC");
+        var p1 = MediaFactory.CreatePodcast("The Joe Rogan Experience", 180, "Joe Rogan");
 
-        // Add the factory-created movie to the service
+        // Demo 2: Create media with Dictionary parameters
+        Console.WriteLine("\n2. Creating media with Dictionary parameters:");
+        var movieParams = new Dictionary<string, object>
+        {
+            ["title"] = "Inception",
+            ["duration"] = 148,
+            ["genre"] = "Sci-Fi",
+            ["director"] = "Christopher Nolan"
+        };
+        var m2 = MediaFactory.Create("movie", movieParams);
+
+        // Demo 3: Create media with user input
+        Console.WriteLine("\n3. Creating media with user input:");
+        Console.Write("What type of media do you want to create? (movie/podcast/series): ");
+        string userChoice = Console.ReadLine()?.ToLower() ?? "movie";
+        
+        IMedia userMedia = null;
+        try
+        {
+            userMedia = MediaFactory.CreateWithUserInput(userChoice);
+            Console.WriteLine(" Media created successfully!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating media: {ex.Message}");
+        }
+
+        // Add all media to the service
         service.Add(m1);
-        // Add the directly created movie to the service
         service.Add(m2);
-        // Add the series to the service
         service.Add(s1);
-        // Add the podcast to the service
         service.Add(p1);
+        if (userMedia != null)
+        {
+            service.Add(userMedia);
+        }
 
-        // Display a header for all media items
-        Console.WriteLine("=== All media ===");
-        // Get all media items and display each one using ForEach
+        // Display all media items
+        Console.WriteLine("\n=== All media ===");
         service.GetAll().ForEach(Console.WriteLine);
 
-        // Empty line for spacing
+        // Demo search functionality
+        Console.WriteLine("\n=== Search by title ===");
+        Console.Write("Enter title to search for: ");
+        string searchTitle = Console.ReadLine() ?? "";
+        var found = service.GetByTitle(searchTitle);
+        Console.WriteLine(found is null ? " Not found" : $" Found: {found}");
 
-        // Display a header for fetching by title
-        Console.WriteLine("\n Fetcch by title===");
-        // Search for media with title "dune"
-        var found = service.GetByTitle("dune");
-        // Display the found media or "not found" if null
-        Console.WriteLine(found is null ? "not found" : found.ToString());
+        // Demo consume functionality
+        if (found != null)
+        {
+            Console.WriteLine("\n=== Consuming media ===");
+            found.Consume();
+        }
 
-        // Display a header for consuming media
-        Console.WriteLine("\n== Consume one");
-        // Call the Consume method on the found media item
-        found.Consume();
-
-        // Empty lines for spacing
-
-        // Empty lines for spacing
-
-        // Empty lines for spacing
-
+        Console.WriteLine("\n=== Program finished ===");
     }
 }
