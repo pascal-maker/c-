@@ -1,31 +1,52 @@
 // Import the Newtonsoft.Json namespace for JSON serialization attributes
 using Newtonsoft.Json;
+
 // Define the namespace for custom models
 namespace Ct.Ai.Models;
-// Define the Post class to represent a blog post from the API
+
+/// <summary>
+/// Post - Model klasse voor het representeren van een blog post object
+/// Gebruikt JSON attributes voor mapping tussen C# properties en JSON velden
+/// Volgt het Data Transfer Object (DTO) pattern voor API communicatie
+/// </summary>
 public class Post
 {
-    // Property to store the user ID with JSON property mapping
+    /// <summary>
+    /// ID van de gebruiker die de post heeft geschreven
+    /// JSON mapping: "userId" in JSON wordt gemapt naar UserId property
+    /// </summary>
     [JsonProperty("userId")]
     public int UserId { get; set; }
 
-    // Property to store the post ID with JSON property mapping
+    /// <summary>
+    /// Uniek ID van de post
+    /// JSON mapping: "id" in JSON wordt gemapt naar Id property
+    /// </summary>
     [JsonProperty("id")]
     public int Id { get; set; }
 
-    // Property to store the post title with JSON property mapping
+    /// <summary>
+    /// Titel van de post
+    /// JSON mapping: "title" in JSON wordt gemapt naar Title property
+    /// </summary>
     [JsonProperty("title")]
     public string Title { get; set; }
 
-    // Property to store the post body content with JSON property mapping
+    /// <summary>
+    /// Inhoud van de post (de hoofdtekst)
+    /// JSON mapping: "body" in JSON wordt gemapt naar Body property
+    /// </summary>
     [JsonProperty("body")]
     public string Body { get; set; }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() voor een leesbare string representatie
+    /// Toont ID en titel van de post
+    /// </summary>
+    /// <returns>Geformatteerde string met post informatie</returns>
     public override string ToString()
     {
-        // Return a formatted string with post ID and title
+        // String interpolatie voor nette weergave van post gegevens
         return $"Id: {Id}, Title: {Title}";
     }
-
 }

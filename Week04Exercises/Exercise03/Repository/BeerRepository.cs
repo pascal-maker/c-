@@ -1,98 +1,99 @@
-// Import the System namespace for basic functionality
 using System;
-// Import the System.Collections.Generic namespace for List<T>
 using System.Collections.Generic;
-// Import the System.Globalization namespace for CultureInfo
 using System.Globalization;
-// Import the System.IO namespace for file operations
 using System.IO;
-// Import the System.Linq namespace for LINQ operations
 using System.Linq;
-// Import the custom exceptions namespace
 using beer.Exceptions;
-// Import the beer models namespace
 using beer.Models;
 
-// Define the namespace for beer repositories
 namespace beer.Repositories
 {
-    // Define the BeerRepository class to handle beer data operations
+    /// <summary>
+    /// BeerRepository - Implementeert data toegang voor Beer objecten
+    /// Leest bier data uit een CSV bestand en converteert naar Beer objecten
+    /// Volgt het Repository Pattern voor scheiding van data toegang en business logic
+    /// </summary>
     public class BeerRepository
     {
-        // Private field to store the file path for the CSV data
+        /// <summary>
+        /// Pad naar het CSV bestand met bier data
+        /// </summary>
         private readonly string _filePath;
-        // Static readonly field for invariant culture info
-        private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
-        // Constructor to initialize the repository with a file path
+        /// <summary>
+        /// CultureInfo.InvariantCulture voor consistente decimal parsing
+        /// Zorgt ervoor dat decimalen correct worden geparsed ongeacht de locale instellingen
+        /// </summary>
+        private static readonly CultureInfo inv = CultureInfo.InvariantCulture;//omdecimalen te kunnen lezen
+
+        /// <summary>
+        /// Constructor die het pad naar het CSV bestand initialiseert
+        /// </summary>
+        /// <param name="filePath">Pad naar het CSV bestand</param>
         public BeerRepository(string filePath)
         {
-            // Assign the provided file path to the private field
             _filePath = filePath;
         }
 
-        // Method to retrieve all beers from the CSV file
+        /// <summary>
+        /// Haalt alle bieren op uit het CSV bestand
+        /// Leest het bestand regel voor regel, parst elke regel naar een Beer object
+        /// Handelt fouten af door ze te loggen en door te gaan met de volgende regel
+        /// </summary>
+        /// <returns>Lijst van alle succesvol geparsede Beer objecten</returns>
         public List<Beer> GetAllBeers()
         {
-            // Create a new list to store beer objects
+            // Maak een lege lijst voor de bieren
             var beers = new List<Beer>();
-            // Check if the file exists, return empty list if not
-            if (!File.Exists(_filePath)) return beers;
 
-            // Read all lines from the file and skip the header row
+            // Controleer of het bestand bestaat, anders return lege lijst
+            if(!File.Exists(_filePath)) return beers;
+
+            // Lees alle regels uit het bestand en sla de header over (Skip(1))
             var lines = File.ReadAllLines(_filePath).Skip(1);
 
-            // Iterate through each line in the file
+            // Loop door alle regels in het bestand
             foreach (var line in lines)
             {
-                // Skip empty or whitespace-only lines
-                if (string.IsNullOrWhiteSpace(line)) continue;
-                // Split the line by semicolon delimiter
+                // Sla lege regels over
+                if(string.IsNullOrWhiteSpace(line)) continue;
+
+                // Split de regel op puntkomma's om de verschillende velden te krijgen
                 var parts = line.Split(';');
-                // Skip lines that don't have enough parts (less than 5)
-                if (parts.Length < 5) continue;
 
-                // Extract and trim the name from the second column
+                // Controleer of er genoeg velden zijn (minimaal 5)
+                if(parts.Length < 5) continue;
+
+                // Haal de verschillende velden op en trim whitespace
                 var name = parts[1].Trim();
-
-                // Extract and trim the brewery from the third column
                 var brewery = parts[2].Trim();
-
-                // Extract and trim the color from the fourth column
                 var color = parts[3].Trim();
+                
+                // Converteer komma naar punt voor decimal parsing
+                var alcoholStr = parts[4].Trim().Replace(',','.');//omdecimalpartsnaarkomma om te zetten
 
-                // Extract alcohol percentage, replace comma with dot for decimal parsing
-                var alcoholStr = parts[4].Trim().Replace(',', '.');
-                // Try to parse the alcohol string to decimal, skip if parsing fails
-                if (!decimal.TryParse(alcoholStr, NumberStyles.Any, Inv, out var alcohol)) continue;
-                // Try to create a new beer object with the parsed data
+                // Probeer het alcohol percentage te parsen naar double
+                if(!double.TryParse(alcoholStr, NumberStyles.Any, inv, out var alcohol)) continue;
+
+                // Probeer een nieuw Beer object te maken en voeg toe aan de lijst
                 try
                 {
-                    // Add the new beer to the list
                     beers.Add(new Beer(name, brewery, alcohol, color));
-
                 }
-                // Catch custom beer exceptions and display detailed error information
-                catch (Beerexception ex)
+                // Vang BeerException op (validatie fouten)
+                catch (BeerException ex)
                 {
-                    // Display the error message with field name and value
-                    Console.WriteLine($"FOut: {ex.Message} (Field: {ex.WrongFieldName}, Value: {ex.WrongValue})");
-
+                    Console.WriteLine($"Fout: {ex.Message} (Field: {ex.WrongFieldName}) (Value: {ex.WrongValue})");
                 }
-
-                // Catch any other unexpected exceptions
+                // Vang alle andere onverwachte fouten op
                 catch (Exception ex)
                 {
-                    // Display unexpected error message
-                    Console.WriteLine($" Onverwachte fout bij het parsen bier: {ex.Message}");
+                    Console.WriteLine($"Onverwachte fout bij het parsen bier: {ex.Message}");
                 }
-
             }
-            // Return the list of successfully parsed beers
+
+            // Return de lijst met alle succesvol geparsede bieren
             return beers;
         }
-
-        // Empty line for spacing
-
     }
 }

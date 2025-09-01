@@ -1,39 +1,47 @@
-// Import System.Collections.Generic for List<T> functionality
 using System.Collections.Generic;
-// Import System.Threading.Tasks for async/await functionality
 using System.Threading.Tasks;
-// Import custom models for Post and Comment classes
 using Ct.Ai.Models;
+using Ct.Ai.Repositories;
+using Ct.Ai.Service;
 
-// Define the namespace for service interfaces
 namespace Ct.Ai.Service
 {
-    // Define the interface for todo application service operations
+    /// <summary>
+    /// ITodoApplicationService - Interface voor de service layer
+    /// Definieert het contract voor business logic operaties met posts en comments
+    /// Volgt het Interface Segregation Principle van SOLID
+    /// </summary>
     public interface ITodoApplicationService
     {
-        // Method to retrieve all posts asynchronously
+        /// <summary>
+        /// Haalt alle posts op uit de externe API
+        /// Async methode voor niet-blokkerende I/O operaties
+        /// </summary>
+        /// <returns>Lijst van alle beschikbare posts</returns>
         Task<List<Post>> GetPosts();
 
-        // Method to retrieve a specific post by ID asynchronously
+        /// <summary>
+        /// Haalt een specifieke post op basis van ID op
+        /// Async methode voor het ophalen van individuele posts
+        /// </summary>
+        /// <param name="id">Het unieke ID van de post</param>
+        /// <returns>De gevonden post of null als niet gevonden</returns>
         Task<Post> GetPostById(int id);
 
-        // Empty line for spacing
-
-        // Method to add a new post asynchronously
+        /// <summary>
+        /// Voegt een nieuwe post toe aan de externe API
+        /// Async methode voor het versturen van data naar server
+        /// </summary>
+        /// <param name="post">Het post object om toe te voegen</param>
+        /// <returns>De toegevoegde post met server-generated ID</returns>
         Task<Post> AddPost(Post post);
 
-        // Method to retrieve all comments for a specific post asynchronously
+        /// <summary>
+        /// Haalt alle comments op voor een specifieke post
+        /// Async methode voor het ophalen van gerelateerde data
+        /// </summary>
+        /// <param name="id">Het ID van de post waarvan comments opgehaald moeten worden</param>
+        /// <returns>Lijst van comments voor de opgegeven post</returns>
         Task<List<Comment>> GetCommentsForPost(int id);
-         
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
     }
-    // Empty line for spacing
-
 }

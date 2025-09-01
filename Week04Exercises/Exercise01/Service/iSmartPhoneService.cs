@@ -1,34 +1,53 @@
-// Import the SmartPhone model to use in this interface
 using smartphones.models;
-// Import the repository interface to reference it
-using smartphones.Repositories;
 
-// Define the namespace for service interfaces
+using smartphones.repositories;
+
 namespace smartphones.Services;
 
-// Define the interface for smartphone service operations
-// This interface defines the contract for business logic operations on smartphones
-// The service layer acts as an intermediary between the UI (Program.cs) and the data layer (Repository)
+/// <summary>
+/// ISmartPhoneService Interface - Definieert het contract voor smartphone business logic
+/// Service layer interface die de business operaties voor smartphones definieert
+/// Scheidt business logic van data toegang (repository pattern)
+/// </summary>
 public interface ISmartPhoneService
 {
-    // Method to retrieve all smartphones
-    // This delegates to the repository but could include business logic like filtering or sorting
+    /// <summary>
+    /// Haalt alle smartphones op via de service layer
+    /// Kan extra business logic bevatten zoals filtering, caching, of validatie
+    /// </summary>
+    /// <returns>Lijst van alle beschikbare smartphones</returns>
     List<SmartPhone> GetSmartPhones();
 
-    // Method to add a new smartphone
-    // This could include validation logic before delegating to the repository
+    /// <summary>
+    /// Voegt een nieuwe smartphone toe via de service layer
+    /// Kan extra validatie en business rules bevatten voordat data wordt opgeslagen
+    /// </summary>
+    /// <param name="smartphone">Het smartphone object om toe te voegen</param>
     void AddSmartPhone(SmartPhone smartphone);
+    // We returneren niets, daarom void - alleen toevoegen, geen return waarde nodig
 
-    // Method to find a smartphone by its unique ID
-    // Returns the SmartPhone if found, null if not found
-    // The ? makes the return type nullable (can return null)
+    /// <summary>
+    /// Zoekt een smartphone op basis van uniek ID
+    /// Service layer kan extra logging of error handling toevoegen
+    /// </summary>
+    /// <param name="id">Het unieke ID van de smartphone</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     SmartPhone? GetSmartPhoneById(int id);
 
-    // Method to find a smartphone by its brand name
-    // Returns the first SmartPhone with matching brand, null if not found
+    /// <summary>
+    /// Zoekt een smartphone op basis van merk (Apple, Samsung, etc.)
+    /// Kan business logic bevatten zoals case-insensitive zoeken
+    /// </summary>
+    /// <param name="brand">Het merk om te zoeken</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     SmartPhone? GetSmartPhoneByBrand(string brand);
 
-    // Method to find a smartphone by its type/model
-    // Returns the first SmartPhone with matching type, null if not found
+    /// <summary>
+    /// Zoekt een smartphone op basis van type (iPhone 14, Galaxy S23, etc.)
+    /// Service layer kan fuzzy matching of suggesties toevoegen
+    /// </summary>
+    /// <param name="type">Het type om te zoeken</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     SmartPhone? GetSmartPhoneByType(string type);
 }
+

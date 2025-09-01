@@ -1,58 +1,66 @@
-﻿// Import the System namespace for basic functionality
-using System;
-// Import the System.Collections.Generic namespace for List<T>
+﻿using System;
+
 using System.Collections.Generic;
-// Import the custom exceptions namespace
 using beer.Exceptions;
 
-// Define the namespace for beer models
 namespace beer.Models
 {
-    // Define the main Program class
+    /// <summary>
+    /// Program - Hoofdklasse voor het testen van de Beer functionaliteit
+    /// Demonstreert het maken van Beer objecten en exception handling
+    /// </summary>
     public class Program
     {
-        // Main entry point of the application
+        /// <summary>
+        /// Main methode - Entry point van het programma
+        /// Test verschillende scenario's voor het maken van Beer objecten
+        /// Toont exception handling voor validatie fouten
+        /// </summary>
+        /// <param name="args">Command line argumenten (niet gebruikt)</param>
         public static void Main(string[] args)
         {
-            // Create a new list to store Beer objects
+            // Maak een lijst om alle succesvol aangemaakte bieren op te slaan
             var beers = new List<Beer>();
 
-            // Empty lines for spacing
-
-            // Try to add a beer with invalid negative alcohol percentage
-            try { beers.Add(new Beer("jupla", "delirium", -1.0m, "yellow")); }
-            // Catch the custom beer exception and display error message
-            catch (Beerexception ex) { Console.WriteLine($"Invalid beer: {ex.Message}"); }
-
-            // Try to add a valid beer
-            try { beers.Add(new Beer("yessbeer", "stella", 8.0m, "blond")); }
-            // Catch the custom beer exception and display error message
-            catch (Beerexception ex) { Console.WriteLine($"Invalid beer: {ex.Message}"); }
-
-            // Try to add another beer with invalid negative alcohol percentage
-            try { beers.Add(new Beer("Kriek", "stekka", -7.0m, "yellow")); }
-            // Catch the custom beer exception and display error message
-            catch (Beerexception ex) { Console.WriteLine($"Invalid beer: {ex.Message}"); }
-
-            // Empty line for spacing
-
-            // Iterate through all beers in the list
-            foreach (var beer in beers)
-            {
-                // Display each beer using its ToString method
-                Console.WriteLine(beer);
-                // Add an empty line after each beer
-                Console.WriteLine();
+            // Test 1: Negatief alcohol percentage (zou een exception moeten gooien)
+            try {
+                beers.Add(new Beer("Jupiler","delirum",-1.0,"blond"));
+            }
+            catch(BeerException ex) {
+                Console.WriteLine($"Invalid beer: {ex.Message}");
             }
 
-            // Empty lines for spacing
+            // Test 2: Geldig bier (zou succesvol moeten zijn)
+            try {
+                beers.Add(new Beer("Toutestbienpils","averagerob",8.0,"brown"));
+            }
+            catch(BeerException ex) {
+                Console.WriteLine($"Invalid beer: {ex.Message}");
+            }
 
-            // Empty lines for spacing
+            // Test 3: Nog een negatief alcohol percentage (zou een exception moeten gooien)
+            try {
+                beers.Add(new Beer("Mannekenpis","abinbev",-1.0,"blond"));
+            }
+            catch(BeerException ex) {
+                Console.WriteLine($"Invalid beer: {ex.Message}");
+            }
 
-            // Empty lines for spacing
+            // Test 4: Lege naam (zou een exception moeten gooien)
+            try {
+                beers.Add(new Beer("","abinbev",9.0,"blond"));
+            }
+            catch(BeerException ex) {
+                Console.WriteLine($"Invalid beer: {ex.Message}");
+            }
 
-            // Empty lines for spacing
-
+            // Toon alle succesvol aangemaakte bieren
+            Console.WriteLine("\nSuccesvol aangemaakte bieren:");
+            foreach (var beer in beers)
+            {
+                Console.WriteLine(beer);
+                Console.WriteLine();
+            }
         }
     }
 }

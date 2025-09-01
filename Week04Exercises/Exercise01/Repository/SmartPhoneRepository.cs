@@ -1,130 +1,136 @@
-// Import necessary namespaces
 using System.Runtime.CompilerServices;
 using smartphones.models;
 
-// Define the namespace for repository implementations
-namespace smartphones.Repositories;
+namespace smartphones.repositories;
 
-// Implement the ISmartPhoneRepository interface
-// This class handles all data access operations for smartphones
+/// <summary>
+/// SmartPhoneRepository - Implementeert ISmartPhoneRepository interface
+/// Verantwoordelijk voor data toegang tot smartphone gegevens via CSV bestand
+/// Volgt het Repository Pattern voor scheiding van data toegang en business logic
+/// </summary>
 public class SmartPhoneRepository : ISmartPhoneRepository
 {
-    // Define the path to the CSV file as a constant
-    // This file stores all smartphone data
+    // Constant voor het pad naar het CSV bestand
+    // Private omdat alleen deze klasse het bestandspad moet kennen
     private const string csvFile = "data/smartphones.csv";
 
-    // Implementation of GetSmartPhones method
-    // This method reads all smartphones from the CSV file
+    /// <summary>
+    /// Haalt alle smartphones op uit het CSV bestand
+    /// Leest het bestand regel voor regel en converteert naar SmartPhone objecten
+    /// </summary>
+    /// <returns>Lijst van alle smartphones uit het CSV bestand</returns>
     public List<SmartPhone> GetSmartPhones()
     {
-        // Create a new list to store smartphone objects
+        // Maak een lege lijst voor de smartphones
         List<SmartPhone> smartphones = new List<SmartPhone>();
 
-        // Read all lines from the CSV file into an array
-        // Each line represents one smartphone record
+        // Lees alle regels uit het CSV bestand
         string[] lines = File.ReadAllLines(csvFile);
 
-        // Loop through all lines starting from index 1 (skip the header row)
-        // Index 0 contains column names: "Id,brand,type,release year,start price,operating system"
+        // Loop door alle regels (start bij 1 om header over te slaan)
         for (int i = 1; i < lines.Length; i++)
         {
-            // Get the current line
             string line = lines[i];
-            
-            // Split the line by comma to separate the different fields
-            // This creates an array where each element is one field
+
+            // Split elke regel op komma's om de verschillende waarden te krijgen
             string[] entries = line.Split(',');
 
-            // Check if we have at least 6 fields (Id, brand, type, release year, start price, operating system)
+            // Controleer of er genoeg kolommen zijn (minimaal 6)
             if (entries.Length >= 6)
             {
-                // Create a new SmartPhone object using object initializer syntax
-                // This uses the default constructor and sets properties
+                // Maak een nieuw SmartPhone object met object initializer syntax
                 SmartPhone newSmartPhone = new SmartPhone
                 {
-                    Id = int.Parse(entries[0].Trim()),           // Convert string to int for ID
-                    Brand = entries[1].Trim(),                   // Brand is the second column
-                    Type = entries[2].Trim(),                    // Type is the third column
-                    ReleaseYear = int.Parse(entries[3].Trim()),  // Convert string to int for release year
-                    StartPrice = int.Parse(entries[4].Trim()),   // Convert string to int for start price
-                    OperatingSystem = entries[5].Trim()          // Operating system is the sixth column
+                    Id = int.Parse(entries[0].Trim()),           // Converteer string naar int
+                    Brand = entries[1].Trim(),                   // Merk (Apple, Samsung, etc.)
+                    Type = entries[2].Trim(),                    // Type (iPhone 14, Galaxy S23, etc.)
+                    ReleaseYear = int.Parse(entries[3].Trim()),  // Uitgave jaar
+                    StartPrice = int.Parse(entries[4].Trim()),   // Startprijs
+                    OperatingSystem = entries[5].Trim()          // Besturingssysteem (iOS, Android)
                 };
-                
-                // Add the created smartphone to our list
+
+                // Voeg de smartphone toe aan de lijst
                 smartphones.Add(newSmartPhone);
             }
         }
 
-        // Return the complete list of smartphones
         return smartphones;
     }
 
-    // Implementation of AddSmartPhone method
-    // This method adds a new smartphone to the CSV file
+    /// <summary>
+    /// Voegt een nieuwe smartphone toe aan het CSV bestand
+    /// Haalt eerst alle bestaande data op, voegt nieuwe toe, en schrijft alles terug
+    /// </summary>
+    /// <param name="smartphone">Het nieuwe smartphone object om toe te voegen</param>
     public void AddSmartPhone(SmartPhone smartphone)
     {
-        // Check if the smartphone parameter is null and throw an exception if it is
-        // This prevents null reference exceptions later in the code
+        // Defensive programming: controleer of smartphone niet null is
         ArgumentNullException.ThrowIfNull(smartphone);
 
-        // Read all existing smartphones from the CSV file
+        // Haal alle bestaande smartphones op
         var smartphones = GetSmartPhones();
-        
-        // Add the new smartphone to the list in memory
+
+        // Voeg de nieuwe smartphone toe aan de lijst
         smartphones.Add(smartphone);
 
-        // Create a new list to hold all lines that will be written to the CSV file
-        var lines = new List<string>();
-        
-        // Add the header row first (column names)
-        lines.Add("Id,brand,type,release year,start price,operating system");
-        
-        // Loop through all smartphones (including the new one) and create CSV lines
+        // Maak een nieuwe lijst voor CSV regels met collection initialization
+        var lines = new List<string>
+        {
+            "Id,brand,type,releaseyear,startprice,operatingsystem"  // CSV header
+        };
+
+        // Converteer elke smartphone naar een CSV regel
         foreach (var phone in smartphones)
         {
-            // Create a CSV line by joining all smartphone properties with commas
-            // Format: ID,Brand,Type,ReleaseYear,StartPrice,OperatingSystem
+            // String interpolatie voor nette CSV formatting
             lines.Add($"{phone.Id},{phone.Brand},{phone.Type},{phone.ReleaseYear},{phone.StartPrice},{phone.OperatingSystem}");
         }
-        
-        // Write all lines back to the CSV file, overwriting the existing content
-        // This ensures the new smartphone is permanently saved
+
+        // Schrijf alle regels naar het CSV bestand (overschrijft het hele bestand)
         File.WriteAllLines(csvFile, lines);
     }
 
-    // Implementation of GetSmartPhoneById method
-    // This method finds a smartphone by its unique ID
+    /// <summary>
+    /// Zoekt een smartphone op basis van ID (uniek nummer)
+    /// Gebruikt FirstOrDefault om null terug te geven als niets gevonden
+    /// </summary>
+    /// <param name="id">Het ID van de smartphone om te zoeken</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     public SmartPhone? GetSmartPhoneById(int id)
     {
-        // Get all smartphones from the CSV file
         var smartphones = GetSmartPhones();
-        
-        // Use LINQ to find the first smartphone with matching ID
-        // FirstOrDefault returns the first match or null if no match is found
+
+        // Lambda expressie: voor elke smartphone s, check of s.Id == id
+        // FirstOrDefault: geeft eerste match of null als niets gevonden
         return smartphones.FirstOrDefault(s => s.Id == id);
     }
 
-    // Implementation of GetSmartPhoneByBrand method
-    // This method finds a smartphone by its brand name
+    /// <summary>
+    /// Zoekt een smartphone op basis van merk (Apple, Samsung, etc.)
+    /// Geeft de eerste smartphone van dat merk terug
+    /// </summary>
+    /// <param name="brand">Het merk om te zoeken</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     public SmartPhone? GetSmartPhoneByBrand(string brand)
     {
-        // Get all smartphones from the CSV file
         var smartphones = GetSmartPhones();
-        
-        // Use LINQ to find the first smartphone with matching brand
-        // String comparison is case-sensitive by default
+
+        // Lambda expressie: voor elke smartphone s, check of s.Brand == brand
         return smartphones.FirstOrDefault(s => s.Brand == brand);
     }
 
-    // Implementation of GetSmartPhoneByType method
-    // This method finds a smartphone by its type/model
+    /// <summary>
+    /// Zoekt een smartphone op basis van type (iPhone 14, Galaxy S23, etc.)
+    /// Geeft de eerste smartphone van dat type terug
+    /// </summary>
+    /// <param name="type">Het type om te zoeken</param>
+    /// <returns>SmartPhone object of null als niet gevonden</returns>
     public SmartPhone? GetSmartPhoneByType(string type)
     {
-        // Get all smartphones from the CSV file
         var smartphones = GetSmartPhones();
-        
-        // Use LINQ to find the first smartphone with matching type
-        // String comparison is case-sensitive by default
+
+        // Lambda expressie: voor elke smartphone s, check of s.Type == type
         return smartphones.FirstOrDefault(s => s.Type == type);
     }
 }
+

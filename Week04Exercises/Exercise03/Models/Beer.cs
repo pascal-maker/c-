@@ -1,78 +1,84 @@
-// Import the System namespace for basic functionality
 using System;
-// Import the custom exceptions namespace
 using beer.Exceptions;
 
-// Define the namespace for beer models
 namespace beer.Models;
 
-// Define the Beer class to represent a beer entity
+/// <summary>
+/// Beer - Model klasse voor het representeren van een bier object
+/// Bevat alle eigenschappen die een bier beschrijven en validatie logica
+/// </summary>
 public class Beer
 {
-    // Property to store the name of the beer
-    public string Name { get; set; }
-    // Property to store the brewery that makes the beer
-    public string Brewery { get; set; }
+    /// <summary>
+    /// Naam van het bier (bijv. "Jupiler", "Heineken")
+    /// </summary>
+    public string Name {get;set;}
 
-    // Property to store the alcohol percentage of the beer
-    public decimal AlcoholPercentage { get; set; }
+    /// <summary>
+    /// Brouwerij die het bier produceert (bijv. "AB InBev", "Heineken")
+    /// </summary>
+    public string Brewery {get;set;}
 
-    // Property to store the color of the beer
-    public string Color { get; set; }
+    /// <summary>
+    /// Alcohol percentage van het bier (bijv. 5.0, 8.5)
+    /// Gebruikt double voor eenvoud en omdat alcohol percentages geen financiële precisie nodig hebben
+    /// </summary>
+    public double AlcoholPercentage {get;set;}
 
-    // Constructor to create a new Beer object with validation
-    public Beer(string name, string brewery, decimal alcoholpercentage, string color)
+    /// <summary>
+    /// Kleur van het bier (bijv. "blond", "bruin", "zwart")
+    /// </summary>
+    public string Color {get;set;}
+
+    /// <summary>
+    /// Constructor voor het maken van een nieuw Beer object
+    /// Voert validatie uit op alle parameters voordat het object wordt aangemaakt
+    /// </summary>
+    /// <param name="name">Naam van het bier</param>
+    /// <param name="brewery">Brouwerij naam</param>
+    /// <param name="alcoholpercentage">Alcohol percentage (moet >= 0 zijn)</param>
+    /// <param name="color">Kleur van het bier</param>
+    /// <exception cref="BeerException">Wordt gegooid als validatie faalt</exception>
+    public Beer(string name,string brewery,double alcoholpercentage,string color)
     {
-        // Check if the name is null, empty, or contains only whitespace
-        if (string.IsNullOrWhiteSpace(name))
+        // Validatie: naam mag niet leeg zijn
+        if(string.IsNullOrWhiteSpace(name))
         {
-            // Throw custom exception if name is invalid
-            throw new Beerexception("name cannot be empty.", nameof(name), name ?? string.Empty);
+            throw new BeerException("name cannot be empty.",nameof(name),name ?? string.Empty);
         }
 
-        // Check if the brewery is null, empty, or contains only whitespace
-        if (string.IsNullOrWhiteSpace(brewery))
+        // Validatie: brouwerij mag niet leeg zijn
+        if(string.IsNullOrWhiteSpace(brewery))
         {
-            // Throw custom exception if brewery is invalid
-            throw new Beerexception("Brewery cannot be empty.", nameof(brewery), brewery ?? string.Empty);
-
-            // Empty line for spacing
+            throw new BeerException("brewery cannot be empty.",nameof(brewery),brewery?? string.Empty);
         }
 
-        // Check if the alcohol percentage is negative
+        // Validatie: alcohol percentage mag niet negatief zijn
         if (alcoholpercentage < 0)
         {
-            // Throw custom exception if alcohol percentage is negative
-            throw new Beerexception("alcohol percentage canot be negative.", nameof(alcoholpercentage), alcoholpercentage.ToString());
+          throw new BeerException("alcohol cannot be negative.",nameof(alcoholpercentage),alcoholpercentage.ToString());
         }
 
-        // Check if the color is null, empty, or contains only whitespace
-        if (string.IsNullOrWhiteSpace(color))
+        // Validatie: kleur mag niet leeg zijn
+        if(string.IsNullOrWhiteSpace(color))
         {
-            // Throw custom exception if color is invalid
-            throw new Beerexception("color cannot be empty.", nameof(color), color ?? string.Empty);
-
-            // Empty line for spacing
+            throw new BeerException("color cannot be empty.",nameof(color),color?? string.Empty);
         }
 
-        // Assign the validated name to the Name property
+        // Als alle validaties slagen, wijs de waarden toe aan de properties
         Name = name;
-        // Assign the validated brewery to the Brewery property
         Brewery = brewery;
-        // Assign the validated alcohol percentage to the AlcoholPercentage property
         AlcoholPercentage = alcoholpercentage;
-        // Assign the validated color to the Color property
         Color = color;
-
-        // Empty lines for spacing
-
     }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() om een leesbare string representatie van het Beer object te geven
+    /// Wordt gebruikt voor console output en debugging
+    /// </summary>
+    /// <returns>String met alle bier eigenschappen</returns>
     public override string ToString()
     {
-        // Return a formatted string with all beer properties
-        return $" Name:{Name},Brewery:{Brewery}, AlcoholPercentage:{AlcoholPercentage},Color:{Color}";
+        return $"Name:{Name}, Brewery:{Brewery},AlcoholPercentage:{AlcoholPercentage},Color:{Color}";
     }
-
 }

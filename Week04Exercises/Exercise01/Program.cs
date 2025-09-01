@@ -1,234 +1,227 @@
-﻿// Import the necessary namespaces to use the models, repositories, and services
-using smartphones.models;
-using smartphones.Repositories;
+﻿using smartphones.models;
+using smartphones.repositories;
 using smartphones.Services;
 
-// Create instances of the repository and service classes
-// This is where dependency injection happens - we create the repository first, then pass it to the service
-var smartphoneRepository = new SmartPhoneRepository();  // Create the data access layer
-var smartphoneService = new SmartPhoneService(smartphoneRepository);  // Create the business logic layer
+// ========================================
+// HOOFDPROGRAMMA - SMARTPHONE MANAGEMENT SYSTEM
+// ========================================
+// Dit programma demonstreert:
+// - Repository Pattern (data toegang)
+// - Service Layer Pattern (business logic)
+// - Dependency Injection (losse koppeling)
+// - Console applicatie met menu systeem
 
-// Boolean variable to control the main program loop
-// When this becomes true, the program will exit
+// Maak een repository aan die toegang heeft tot de data (CSV/DB/enz.)
+// Repository Pattern: verantwoordelijk voor data opslag en ophalen
+var smartPhoneRepository = new SmartPhoneRepository();
+
+// Maak de service laag aan die de logica bevat, en koppel deze aan de repository
+// Service Layer: bevat business rules en gebruikt repository voor data toegang
+// Dependency Injection: service krijgt repository als parameter
+var smartPhoneService = new SmartPhoneService(smartPhoneRepository);
+
+// Flag om het programma te kunnen stoppen
+// Wordt true wanneer gebruiker kiest om te stoppen
 bool exit = false;
 
-// Main program loop - this runs until the user chooses to exit
-while (!exit)
+// Eindeloze loop voor het menu, stopt pas wanneer exit = true wordt
+// Dit is een typische console applicatie pattern
+while(!exit)
 {
-    // Clear the console screen to show a clean menu
+    // Scherm leegmaken voor betere gebruikerservaring
+    // Zorgt ervoor dat het menu altijd bovenaan staat
     Console.Clear();
-    
-    // Display the main menu options
-    Console.WriteLine("=== Smartphone Management System ===");
-    Console.WriteLine("1. View All Smartphones");
-    Console.WriteLine("2. Add New Smartphone");
-    Console.WriteLine("3. Search by Brand");
-    Console.WriteLine("4. Search by Type");
-    Console.WriteLine("5. Get smartphone by ID");
-    Console.WriteLine("6. Exit");
-    Console.Write("\nEnter your choice (1-6): ");
 
-    // Read the user's choice from the console
+    // Menu opties - gebruikersinterface
+    // Toont alle beschikbare functionaliteiten
+    Console.WriteLine("=======Smartphone management system");
+    Console.WriteLine("1.View All Smartphones");      // Toon alle smartphones
+    Console.WriteLine("2.Add New Smartphone");        // Voeg nieuwe toe
+    Console.WriteLine("3.Search By Brand");           // Zoek op merk
+    Console.WriteLine("4.Search By Type");            // Zoek op type
+    Console.WriteLine("5.Get Smartphone by ID");      // Zoek op ID
+    Console.WriteLine("6.Exit");                      // Stop programma
+    Console.Write("\nEnter your choice (1-6):");
+
+    // Lees keuze van de gebruiker
+    // Console.ReadLine() wacht op Enter toets
     string choice = Console.ReadLine();
 
-    // Switch statement to handle different menu choices
+    // Switch om de keuze uit te voeren
+    // Elke case roept een andere methode aan
     switch (choice)
     {
         case "1":
-            // Call the method to display all smartphones
-            GetSmartPhones(smartphoneService);
+            GetSmartPhones(smartPhoneService);        // Toon alle smartphones
             break;
         case "2":
-            // Call the method to add a new smartphone
-            AddSmartPhone(smartphoneService);
+            AddSmartPhone(smartPhoneService);         // Voeg nieuwe toe
             break;
         case "3":
-            // Call the method to search by brand
-            GetSmartPhoneByBrand(smartphoneService);
+            GetSmartPhoneByBrand(smartPhoneService);  // Zoek op merk
             break;
         case "4":
-            // Call the method to search by type
-            GetSmartPhoneByType(smartphoneService);
-            break;
+            GetSmartPhoneByType(smartPhoneService);   // Zoek op type
+            break;  
         case "5":
-            // Call the method to search by ID
-            GetSmartPhoneById(smartphoneService);
+            GetSmartPhoneById(smartPhoneService);     // Zoek op ID
             break;
         case "6":
-            // Set exit flag to true to end the program
-            exit = true;
-            Console.WriteLine("Goodbye!");
+            exit = true;                              // Stop programma
+            Console.WriteLine("Goodbye");
             break;
-        
         default:
-            // Handle invalid menu choices
-            Console.WriteLine("Invalid choice. Press any key to continue...");
-            Console.ReadKey();
+            // Ongeldige keuze - toon foutmelding
+            Console.WriteLine("Invalid choice. Press Enter to continue..");
+            Console.ReadLine();                        // Wacht op Enter
             break;
     }
 }
 
-// Helper method to display all smartphones
-// This method takes the service as a parameter (dependency injection)
-static void GetSmartPhones(SmartPhoneService smartphoneService)
+// ========================================
+// STATIC METHODEN - FUNCTIONALITEITEN
+// ========================================
+// Deze methoden bevatten de specifieke functionaliteiten
+// Ze krijgen de service als parameter (dependency injection)
+
+// ---------------------------
+// Methode 1: Toon alle smartphones
+// ---------------------------
+// Doel: Toont alle smartphones in het systeem
+// Gebruikt: Service layer om data op te halen
+static void GetSmartPhones(SmartPhoneService smartPhoneService)
 {
-    // Clear the console and show a header
+    // Scherm leegmaken en titel tonen
     Console.Clear();
     Console.WriteLine("=== All Smartphones ===\n");
 
-    // Get all smartphones from the service (which gets them from the repository)
-    var smartphones = smartphoneService.GetSmartPhones();
+    // Haal lijst van smartphones op via service
+    // Service layer zorgt voor business logic en data toegang
+    var smartphones = smartPhoneService.GetSmartPhones();
 
-    // Check if there are any smartphones to display
-    if (smartphones.Count == 0)
+    // Controleer of er smartphones zijn gevonden
+    if(smartphones.Count == 0)
     {
         Console.WriteLine("No smartphones found.");
     }
     else
     {
-        // Loop through each smartphone and display it
-        // The ToString() method is automatically called when we use Console.WriteLine(smartphone)
+        // Print elk smartphone object
+        // foreach loop door alle smartphones
         foreach (var smartphone in smartphones)
         {
-            Console.WriteLine(smartphone);
+            Console.WriteLine(smartphone);  // ToString() wordt automatisch aangeroepen
         }
     }
 
-    // Display the total count of smartphones
+    // Toon totaal aantal en wacht op Enter
     Console.WriteLine($"\nTotal smartphones: {smartphones.Count}");
-    Console.WriteLine("\nPress any key to continue...");
-    Console.ReadKey();  // Wait for user to press a key before continuing
+    Console.WriteLine("\nPress Enter to continue..");
+    Console.ReadLine();  // Wacht op Enter
 }
 
-// Helper method to add a new smartphone
-static void AddSmartPhone(SmartPhoneService smartphoneService)
+// ---------------------------
+// Methode 2: Nieuwe smartphone toevoegen
+// ---------------------------
+// Doel: Voegt een nieuwe smartphone toe aan het systeem
+// Bevat: Input validatie en error handling
+static void AddSmartPhone(SmartPhoneService smartPhoneService)
 {
-    // Clear the console and show a header
+    // Scherm leegmaken en titel tonen
     Console.Clear();
-    Console.WriteLine("=== Add New Smartphone ===\n");
-    
-    // Use try-catch to handle any errors that might occur during input
+    Console.WriteLine("==== Add new Smartphone ===\n");
+
+    // Try-catch voor error handling
+    // Vangt fouten op bij verkeerde invoer
     try
     {
-        // Get smartphone ID from user
+        // Invoer van gebruiker voor nieuwe smartphone
+        // Elke eigenschap wordt apart ingevoerd
         Console.Write("Enter ID: ");
-        int id = int.Parse(Console.ReadLine() ?? string.Empty);  // Convert string to int, use empty string if null
-        
-        // Get smartphone brand from user
-        Console.Write("Enter Brand: ");
-        string brand = Console.ReadLine() ?? string.Empty;
-        
-        // Get smartphone type from user
-        Console.Write("Enter Type: ");
-        string type = Console.ReadLine() ?? string.Empty;
-        
-        // Get release year from user
-        Console.Write("Enter the release year: ");
-        int releaseyear = int.Parse(Console.ReadLine() ?? string.Empty);
+        int id = int.Parse(Console.ReadLine() ?? string.Empty);  // Converteer naar int
 
-        // Get start price from user
+        Console.Write("Enter Brand: ");
+        string brand  = Console.ReadLine() ?? string.Empty;      // Merk (Apple, Samsung, etc.)
+
+        Console.Write("Enter Type: ");
+        string type  = Console.ReadLine() ?? string.Empty;       // Type (iPhone 14, Galaxy S23, etc.)
+
+        Console.Write("Enter the Release Year: ");
+        int releaseyear = int.Parse(Console.ReadLine() ?? string.Empty);  // Jaar van uitgave
+
         Console.Write("Enter the start price: ");
-        int startprice = int.Parse(Console.ReadLine() ?? string.Empty);
-        
-        // Get operating system from user
+        int startprice = int.Parse(Console.ReadLine() ?? string.Empty);   // Startprijs
+
         Console.Write("Enter Operating System: ");
-        string operatingsystem = Console.ReadLine() ?? string.Empty;
-        
-        // Validate that required fields are not empty
-        if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(type) || string.IsNullOrWhiteSpace(operatingsystem))
+        string operatingsystem  = Console.ReadLine() ?? string.Empty;     // OS (iOS, Android, etc.)
+
+        // Check of de verplichte velden ingevuld zijn
+        // Validatie: controleer of belangrijke velden niet leeg zijn
+        if(string.IsNullOrWhiteSpace(brand) && 
+           string.IsNullOrWhiteSpace(type) && 
+           string.IsNullOrWhiteSpace(operatingsystem))
         {
-            Console.WriteLine("Brand, Type and Operating System are required!");
+            Console.WriteLine("Brand, type and operating system are required");
         }
         else
         {
-            // Create a new SmartPhone object using object initializer syntax
+            // Maak nieuw SmartPhone object via object initializer
+            // Object initializer syntax: direct properties instellen
             var newSmartPhone = new SmartPhone
             {
-                Id = id,
-                Brand = brand,
-                Type = type,
-                ReleaseYear = releaseyear,
-                StartPrice = startprice,
-                OperatingSystem = operatingsystem
+                Id = id,                    // Uniek ID
+                Brand = brand,              // Merk
+                Type = type,                // Type
+                ReleaseYear = releaseyear,  // Uitgave jaar
+                StartPrice = startprice,    // Startprijs
+                OperatingSystem = operatingsystem  // Besturingssysteem
             };
 
-            // Add the smartphone through the service (which will save it to the CSV file)
-            smartphoneService.AddSmartPhone(newSmartPhone);
+            // Voeg toe via service
+            // Service layer zorgt voor business logic en data opslag
+            smartPhoneService.AddSmartPhone(newSmartPhone);
             Console.WriteLine("\nSmartphone added successfully!");
         }
     }
     catch (Exception ex)
     {
-        // Display any error that occurred during the process
+        // Foutafhandeling bij verkeerde invoer
+        // Toon foutmelding aan gebruiker
         Console.WriteLine($"Error adding smartphone: {ex.Message}");
     }
-    
-    // Wait for user to press a key before continuing
-    Console.WriteLine("\nPress any key to continue...");
-    Console.ReadKey();
+
+    // Wacht op gebruiker om door te gaan
+    Console.WriteLine("\nPress Enter to continue...");
+    Console.ReadLine();
 }
 
-// Helper method to search for a smartphone by ID
-static void GetSmartPhoneById(SmartPhoneService smartphoneService)
+// ---------------------------
+// Methode 3: Zoek smartphone op merk
+// ---------------------------
+// Doel: Zoekt een smartphone op basis van merk
+// Bevat: Null checking en safe navigation
+static void GetSmartPhoneByBrand(SmartPhoneService smartPhoneService)
 {
-    // Clear the console and show a header
+    // Scherm leegmaken en titel tonen
     Console.Clear();
-    Console.WriteLine("=== Find Smartphone by ID ===\n");
-    
-    // Get the ID from user
-    Console.Write("Enter smartphone ID: ");
-    
-    // Try to parse the input as an integer
-    // TryParse returns true if successful, false if it fails
-    if (int.TryParse(Console.ReadLine(), out int id))
+    Console.WriteLine("====== Search smartphone by brand ====\n");
+
+    // Vraag gebruiker om merk in te voeren
+    Console.Write("Enter the smartphone brand: ");
+    string? brand = Console.ReadLine();  // Nullable string voor veiligheid
+
+    // Controleer of brand niet leeg is
+    if(!string.IsNullOrEmpty(brand))
     {
-        // Search for the smartphone using the service
-        var smartphone = smartphoneService.GetSmartPhoneById(id);
-        
-        // Check if a smartphone was found
+        // Zoek via service
+        // Service layer gebruikt repository om te zoeken
+        var smartphone = smartPhoneService.GetSmartPhoneByBrand(brand);
+
+        // Controleer of smartphone gevonden is
         if (smartphone != null)
         {
             Console.WriteLine($"\nFound smartphone:");
-            Console.WriteLine(smartphone);  // Uses the ToString() method
-        }
-        else
-        {
-            Console.WriteLine($"\nNo smartphone found with ID {id}");
-        }
-    }
-    else
-    {
-        // Handle invalid input (non-numeric)
-        Console.WriteLine("Invalid ID format.");
-    }
-    
-    // Wait for user to press a key before continuing
-    Console.WriteLine("\nPress any key to continue...");
-    Console.ReadKey();
-}
-
-// Helper method to search for a smartphone by brand
-static void GetSmartPhoneByBrand(SmartPhoneService smartphoneService)
-{
-    // Clear the console and show a header
-    Console.Clear();
-    Console.WriteLine("=== Search Smartphone by Brand ===\n");
-    
-    // Get the brand from user
-    Console.Write("Enter smartphone brand: ");
-    string? brand = Console.ReadLine();  // Read the input as a string
-    
-    // Check if the input is not null or empty
-    if (!string.IsNullOrEmpty(brand))
-    {
-        // Search for the smartphone using the service
-        var smartphone = smartphoneService.GetSmartPhoneByBrand(brand);
-        
-        // Check if a smartphone was found
-        if (smartphone != null)
-        {
-            Console.WriteLine($"\nFound smartphone:");
-            Console.WriteLine(smartphone);  // Uses the ToString() method
+            Console.WriteLine(smartphone);  // ToString() wordt aangeroepen
         }
         else
         {
@@ -237,37 +230,40 @@ static void GetSmartPhoneByBrand(SmartPhoneService smartphoneService)
     }
     else
     {
-        // Handle empty input
         Console.WriteLine("Invalid brand format.");
     }
-    
-    // Wait for user to press a key before continuing
-    Console.WriteLine("\nPress any key to continue...");
-    Console.ReadKey();
+
+    // Wacht op gebruiker om door te gaan
+    Console.WriteLine("\nPress Enter to continue...");
+    Console.ReadLine();
 }
 
-// Helper method to search for a smartphone by type
-static void GetSmartPhoneByType(SmartPhoneService smartphoneService)
+// ---------------------------
+// Methode 4: Zoek smartphone op type
+// ---------------------------
+// Doel: Zoekt een smartphone op basis van type
+// Vergelijkbaar met brand zoeken maar voor type
+static void GetSmartPhoneByType(SmartPhoneService smartPhoneService)
 {
-    // Clear the console and show a header
+    // Scherm leegmaken en titel tonen
     Console.Clear();
-    Console.WriteLine("=== Search Smartphone by Type ===\n");
-    
-    // Get the type from user
-    Console.Write("Enter smartphone type: ");
-    string? type = Console.ReadLine();  // Read the input as a string
-    
-    // Check if the input is not null or empty
-    if (!string.IsNullOrEmpty(type))
+    Console.WriteLine("====== Search smartphone by type ====\n");
+
+    // Vraag gebruiker om type in te voeren
+    Console.Write("Enter the smartphone type: ");
+    string? type = Console.ReadLine();  // Nullable string voor veiligheid
+
+    // Controleer of type niet leeg is
+    if(!string.IsNullOrEmpty(type))
     {
-        // Search for the smartphone using the service
-        var smartphone = smartphoneService.GetSmartPhoneByType(type);
-        
-        // Check if a smartphone was found
+        // Zoek via service layer
+        var smartphone = smartPhoneService.GetSmartPhoneByType(type);
+
+        // Controleer of smartphone gevonden is
         if (smartphone != null)
         {
             Console.WriteLine($"\nFound smartphone:");
-            Console.WriteLine(smartphone);  // Uses the ToString() method
+            Console.WriteLine(smartphone);  // ToString() wordt aangeroepen
         }
         else
         {
@@ -276,11 +272,53 @@ static void GetSmartPhoneByType(SmartPhoneService smartphoneService)
     }
     else
     {
-        // Handle empty input
         Console.WriteLine("Invalid type format.");
     }
-    
-    // Wait for user to press a key before continuing
-    Console.WriteLine("\nPress any key to continue...");
-    Console.ReadKey();
+
+    // Wacht op gebruiker om door te gaan
+    Console.WriteLine("\nPress Enter to continue...");
+    Console.ReadLine();
+}
+
+// ---------------------------
+// Methode 5: Zoek smartphone op ID
+// ---------------------------
+// Doel: Zoekt een smartphone op basis van uniek ID
+// Bevat: TryParse voor veilige integer conversie
+static void GetSmartPhoneById(SmartPhoneService smartPhoneService)
+{
+    // Scherm leegmaken en titel tonen
+    Console.Clear();
+    Console.WriteLine("====== Search smartphone by ID ====\n");
+
+    // Vraag gebruiker om ID in te voeren
+    Console.Write("Enter the smartphone ID: ");
+
+    // Gebruik TryParse om foutieve invoer te vermijden
+    // TryParse: probeert string naar int te converteren, geeft false als het mislukt
+    if(int.TryParse(Console.ReadLine(), out int id))
+    {
+        // Zoek via service layer
+        var smartphone = smartPhoneService.GetSmartPhoneById(id);
+
+        // Controleer of smartphone gevonden is
+        if (smartphone != null)
+        {
+            Console.WriteLine($"\nFound smartphone:");
+            Console.WriteLine(smartphone);  // ToString() wordt aangeroepen
+        }
+        else
+        {
+            Console.WriteLine($"\nNo smartphone found with ID {id}");
+        }
+    }
+    else
+    {
+        // Foutmelding bij ongeldige ID invoer
+        Console.WriteLine("Invalid ID format.");
+    }
+
+    // Wacht op gebruiker om door te gaan
+    Console.WriteLine("\nPress Enter to continue...");
+    Console.ReadLine();
 }

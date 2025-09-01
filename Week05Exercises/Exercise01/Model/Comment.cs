@@ -1,35 +1,57 @@
-// Import the Newtonsoft.Json namespace for JSON serialization attributes
 using Newtonsoft.Json;
-// Define the namespace for custom models
+
 namespace Ct.Ai.Models;
-// Define the Comment class to represent a comment on a post from the API
+
+/// <summary>
+/// Comment - Model klasse voor het representeren van een comment object
+/// Gebruikt JSON attributes voor mapping tussen C# properties en JSON velden
+/// Volgt het Data Transfer Object (DTO) pattern voor API communicatie
+/// </summary>
 public class Comment
 {
-    // Property to store the post ID that this comment belongs to with JSON property mapping
+    /// <summary>
+    /// ID van de post waar deze comment bij hoort
+    /// JSON mapping: "postId" in JSON wordt gemapt naar PostId property
+    /// </summary>
     [JsonProperty("postId")]
     public int PostId { get; set; }
 
-    // Property to store the comment ID with JSON property mapping
+    /// <summary>
+    /// Uniek ID van de comment
+    /// JSON mapping: "id" in JSON wordt gemapt naar Id property
+    /// </summary>
     [JsonProperty("id")]
     public int Id { get; set; }
 
-    // Property to store the commenter's name with JSON property mapping
+    /// <summary>
+    /// Naam van de auteur van de comment
+    /// JSON mapping: "name" in JSON wordt gemapt naar Name property
+    /// </summary>
     [JsonProperty("name")]
     public string Name { get; set; }
 
-    // Property to store the commenter's email with JSON property mapping
+    /// <summary>
+    /// Email adres van de auteur van de comment
+    /// JSON mapping: "email" in JSON wordt gemapt naar Email property
+    /// </summary>
     [JsonProperty("email")]
-    public string email { get; set; }
+    public string Email { get; set; }
 
-    // Property to store the comment body content with JSON property mapping
-    [JsonProperty("Body")]
+    /// <summary>
+    /// Inhoud van de comment (de tekst)
+    /// JSON mapping: "body" in JSON wordt gemapt naar Body property
+    /// </summary>
+    [JsonProperty("body")]
     public string Body { get; set; }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() voor een leesbare string representatie
+    /// Toont ID, post ID en de inhoud van de comment
+    /// </summary>
+    /// <returns>Geformatteerde string met comment informatie</returns>
     public override string ToString()
     {
-        // Return a formatted string with comment ID, post ID, and body
-        return $" Comment Id: {Id}, on Post {PostId}: {Body}";
+        // String interpolatie voor nette weergave van comment gegevens
+        return $"Id: {Id}, On Post: {PostId}: {Body}";
     }
-
 }

@@ -1,65 +1,76 @@
-// Import System.Collections.Generic for List<T> functionality
 using System.Collections.Generic;
-// Import System.Threading.Tasks for async/await functionality
 using System.Threading.Tasks;
-// Import custom models for Post and Comment classes
 using Ct.Ai.Models;
+using Ct.Ai.Repositories;
+using Ct.Ai.Service;
 
-// Define the namespace for service implementations
 namespace Ct.Ai.Service
 {
-    // Define the TodoApplicationService class that implements ITodoApplicationService interface
-    public class TodoApplicationService : ITodoApplicationService
+    /// <summary>
+    /// TodoApplicationService - Service klasse voor het beheren van posts en comments
+    /// Implementeert het Service Layer Pattern voor business logic
+    /// Gebruikt async/await voor asynchrone operaties met externe API
+    /// </summary>
+    public class TodoApplicationService: ITodoApplicationService
     {
-        // Private field to store the post repository dependency
+        // Dependency injection: service gebruikt repository voor data toegang
+        // Private field voor loose coupling tussen service en repository
         private IPostRepository _postRepository;
 
-        // Constructor to initialize the service with a new repository instance
+        /// <summary>
+        /// Constructor - Initialiseert de service met een nieuwe repository
+        /// Dependency Injection: service krijgt repository als dependency
+        /// </summary>
         public TodoApplicationService()
         {
-            // Create a new PostRepository instance for data access
             _postRepository = new PostRepository();
         }
 
-        // Implementation of GetPosts method to retrieve all posts
+        /// <summary>
+        /// Haalt alle posts op uit de externe API
+        /// Async methode: wacht niet op I/O operaties, laat andere taken toe
+        /// </summary>
+        /// <returns>Lijst van alle beschikbare posts</returns>
         public async Task<List<Post>> GetPosts()
         {
-            // Delegate the call to the repository and return the result
+            // Delegate naar repository: service doet alleen business logic
             return await _postRepository.GetPosts();
         }
 
-        // Implementation of GetPostById method to retrieve a specific post by ID
-        public async Task<Post> GetPostById(int Id)
+        /// <summary>
+        /// Haalt een specifieke post op basis van ID op
+        /// Async methode voor niet-blokkerende I/O operaties
+        /// </summary>
+        /// <param name="id">Het unieke ID van de post</param>
+        /// <returns>De gevonden post of null als niet gevonden</returns>
+        public async Task<Post> GetPostById(int id)
         {
-            // Delegate the call to the repository and return the result
-            return await _postRepository.GetPostById(Id);
+            // Delegate naar repository voor data toegang
+            return await _postRepository.GetPostById(id);
         }
 
-        // Implementation of AddPost method to add a new post
+        /// <summary>
+        /// Voegt een nieuwe post toe aan de externe API
+        /// Async methode voor het versturen van data naar server
+        /// </summary>
+        /// <param name="post">Het post object om toe te voegen</param>
+        /// <returns>De toegevoegde post met server-generated ID</returns>
         public async Task<Post> AddPost(Post post)
         {
-            // Delegate the call to the repository and return the result
+            // Delegate naar repository voor data opslag
             return await _postRepository.AddPost(post);
         }
 
-        // Implementation of GetCommentsForPost method to retrieve comments for a specific post
+        /// <summary>
+        /// Haalt alle comments op voor een specifieke post
+        /// Async methode voor het ophalen van gerelateerde data
+        /// </summary>
+        /// <param name="id">Het ID van de post waarvan comments opgehaald moeten worden</param>
+        /// <returns>Lijst van comments voor de opgegeven post</returns>
         public async Task<List<Comment>> GetCommentsForPost(int id)
         {
-            // Delegate the call to the repository and return the result
+            // Delegate naar repository voor data toegang
             return await _postRepository.GetCommentsForPost(id);
         }
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
     }
 }
