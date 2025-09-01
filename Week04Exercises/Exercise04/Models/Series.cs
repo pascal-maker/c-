@@ -4,52 +4,66 @@
 // Define the namespace for media models
 namespace media.models;
 
-// Define the Series class that implements the IMedia interface
+/// <summary>
+/// Series - Concrete implementatie van IMedia voor televisieseries
+/// Representeert een serie met specifieke eigenschappen zoals aantal afleveringen en netwerk
+/// Demonstreert inheritance en interface implementatie
+/// </summary>
 public class Series : IMedia
 {
-    // Property to store the title of the series
+    /// <summary>
+    /// Titel van de serie (implementatie van IMedia.Title)
+    /// </summary>
     public string Title { get; set; }
 
-    // Property to store the number of episodes in the series
+    /// <summary>
+    /// Aantal afleveringen in de serie
+    /// </summary>
     public int NumberOfEpisodes { get; set; }
 
-    // Property to store the genre of the series
+    /// <summary>
+    /// Genre van de serie (bijv. "Drama", "Comedy", "Thriller")
+    /// </summary>
     public string Genre { get; set; }
 
-    // Property to store the creator of the series
+    /// <summary>
+    /// Netwerk of platform dat de serie uitzendt (bijv. "Netflix", "HBO", "ABC")
+    /// </summary>
     public string Creator { get; set; }
 
-    // Constructor to create a new Series object with all required properties
+    /// <summary>
+    /// Constructor voor het maken van een nieuwe Series
+    /// Initialiseert alle properties met de opgegeven waarden
+    /// </summary>
+    /// <param name="title">Titel van de serie</param>
+    /// <param name="numberofepisodes">Aantal afleveringen</param>
+    /// <param name="genre">Genre van de serie</param>
+    /// <param name="creator">Netwerk of platform</param>
     public Series(string title, int numberofepisodes, string genre, string creator)
     {
-        // Assign the title parameter to the Title property
+        // Wijs alle parameters toe aan de properties
         Title = title;
-        // Assign the number of episodes parameter to the NumberOfEpisodes property
         NumberOfEpisodes = numberofepisodes;
-        // Assign the genre parameter to the Genre property
         Genre = genre;
-        // Assign the creator parameter to the Creator property
         Creator = creator;
     }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() voor een leesbare string representatie
+    /// Toont alle belangrijke eigenschappen van de serie
+    /// </summary>
+    /// <returns>Geformatteerde string met serie details</returns>
     public override string ToString()
-        {
-            // Return a formatted string with all series details
-            return $" Title: {Title},  Number of Episodes {NumberOfEpisodes}, Genre: {Genre},Creator:{Creator}";
-        }
+    {
+        return $"Title: {Title}, Number of Episodes: {NumberOfEpisodes}, Genre: {Genre}, Creator: {Creator}";
+    }
 
-        // Empty line for spacing
-        
-        // Implementation of the Consume method from IMedia interface
-        public void Consume()
-        {
-            // Display a message indicating the series is being consumed
-            Console.WriteLine($"  This Serie is getting consumed");
-        }
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
+    /// <summary>
+    /// Implementatie van IMedia.Consume()
+    /// Definieert hoe een serie wordt geconsumeerd (bekeken)
+    /// </summary>
+    public void Consume()
+    {
+        Console.WriteLine($"This Series is getting consumed");
+    }
 }

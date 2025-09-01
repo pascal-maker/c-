@@ -4,52 +4,66 @@
 // Define the namespace for media models
 namespace media.models;
 
-// Define the Movie class that implements the IMedia interface
+/// <summary>
+/// Movie - Concrete implementatie van IMedia voor films
+/// Representeert een film met specifieke eigenschappen zoals duur, genre en regisseur
+/// Demonstreert inheritance en interface implementatie
+/// </summary>
 public class Movie : IMedia
 {
-    // Property to store the title of the movie
+    /// <summary>
+    /// Titel van de film (implementatie van IMedia.Title)
+    /// </summary>
     public string Title { get; set; }
 
-    // Property to store the duration of the movie in minutes
+    /// <summary>
+    /// Duur van de film in minuten
+    /// </summary>
     public int Duration { get; set; }
 
-    // Property to store the genre of the movie
+    /// <summary>
+    /// Genre van de film (bijv. "Action", "Drama", "Comedy")
+    /// </summary>
     public string Genre { get; set; }
 
-    // Property to store the director of the movie
+    /// <summary>
+    /// Regisseur van de film
+    /// </summary>
     public string Director { get; set; }
 
-    // Constructor to create a new Movie object with all required properties
+    /// <summary>
+    /// Constructor voor het maken van een nieuwe Movie
+    /// Initialiseert alle properties met de opgegeven waarden
+    /// </summary>
+    /// <param name="title">Titel van de film</param>
+    /// <param name="duration">Duur in minuten</param>
+    /// <param name="genre">Genre van de film</param>
+    /// <param name="director">Regisseur van de film</param>
     public Movie(string title, int duration, string genre, string director)
     {
-        // Assign the title parameter to the Title property
+        // Wijs alle parameters toe aan de properties
         Title = title;
-        // Assign the duration parameter to the Duration property
         Duration = duration;
-        // Assign the genre parameter to the Genre property
         Genre = genre;
-        // Assign the director parameter to the Director property
         Director = director;
     }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() voor een leesbare string representatie
+    /// Toont alle belangrijke eigenschappen van de film
+    /// </summary>
+    /// <returns>Geformatteerde string met film details</returns>
     public override string ToString()
-        {
-            // Return a formatted string with all movie details
-            return $" Title: {Title},  Duration {Duration}, Genre: {Genre},Director:{Director}";
-        }
+    {
+        return $"Title: {Title}, Duration: {Duration}, Genre: {Genre}, Director: {Director}";
+    }
 
-        // Empty line for spacing
-        
-        // Implementation of the Consume method from IMedia interface
-        public void Consume()
-        {
-            // Display a message indicating the movie is being consumed
-            Console.WriteLine($"  This Movie is getting consumed");
-        }
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
+    /// <summary>
+    /// Implementatie van IMedia.Consume()
+    /// Definieert hoe een film wordt geconsumeerd (bekeken)
+    /// </summary>
+    public void Consume()
+    {
+        Console.WriteLine($"This Movie is getting consumed");
+    }
 }

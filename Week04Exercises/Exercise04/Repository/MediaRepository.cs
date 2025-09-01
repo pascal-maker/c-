@@ -4,56 +4,65 @@ using media.models;
 // Define the namespace for media repositories
 namespace media.Repositories
 {
-  // Define the MediaRepository class that implements IMediaRepository interface
-  public class MediaRepository : IMediaRepository
-  {
-    // Private static readonly list to store all media items in memory
-    private static readonly List<IMedia> _store = new();
-
-    // Implementation of the Add method to add a new media item
-    public void Add(IMedia media)
+    /// <summary>
+    /// MediaRepository - Concrete implementatie van IMediaRepository
+    /// Implementeert data toegang voor media objecten met in-memory storage
+    /// Volgt het Repository Pattern voor scheiding van data toegang en business logic
+    /// </summary>
+    public class MediaRepository : IMediaRepository
     {
-      // Check if a media item with the same title already exists (case-insensitive)
-      if (_store.Any(m => m.Title.Equals(media.Title, StringComparison.OrdinalIgnoreCase)))
-        // Throw an exception if the title already exists
-        throw new InvalidOperationException($"media with title'{media.Title} already exists");
-      // Add the media item to the store if title is unique
-      _store.Add(media);
+        /// <summary>
+        /// In-memory storage voor alle media items
+        /// Static readonly lijst die wordt gedeeld door alle instanties
+        /// </summary>
+        private static readonly List<IMedia> _store = new();
+
+        /// <summary>
+        /// Voegt een nieuw media item toe aan de repository
+        /// Controleert op duplicaten op basis van titel (case-insensitive)
+        /// </summary>
+        /// <param name="media">Het media object om toe te voegen</param>
+        /// <exception cref="InvalidOperationException">Wordt gegooid als titel al bestaat</exception>
+        public void Add(IMedia media)
+        {
+            // Controleer of er al een media item bestaat met dezelfde titel (case-insensitive)
+            if (_store.Any(m => m.Title.Equals(media.Title, StringComparison.OrdinalIgnoreCase)))
+            {
+                // Gooi exception als titel al bestaat
+                throw new InvalidOperationException($"Media with title '{media.Title}' already exists");
+            }
+            
+            // Voeg het media item toe aan de store als titel uniek is
+            _store.Add(media);
+        }
+
+        /// <summary>
+        /// Haalt een media item op basis van titel op
+        /// Zoekt case-insensitive en handelt null/empty input af
+        /// </summary>
+        /// <param name="title">Titel van het media item om te zoeken</param>
+        /// <returns>Media object of null als niet gevonden</returns>
+        public IMedia Get(string title)
+        {
+            // Return null als titel null, leeg of alleen whitespace is
+            if (string.IsNullOrWhiteSpace(title)) return null;
+            
+            // Trim whitespace van de titel
+            var key = title.Trim();
+            
+            // Zoek het eerste media item dat overeenkomt met de titel (case-insensitive)
+            return _store.FirstOrDefault(m => m.Title.Equals(key, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Haalt alle media items op uit de repository
+        /// Return een nieuwe lijst om de originele lijst te beschermen
+        /// </summary>
+        /// <returns>Lijst van alle media objecten</returns>
+        public List<IMedia> GetAll()
+        {
+            // Return een nieuwe lijst met alle media items uit de store
+            return _store.ToList();
+        }
     }
-
-    // Empty line for spacing
-
-    // Implementation of the Get method to retrieve a media item by title
-    public IMedia Get(string title)
-    {
-      // Return null if the title is null, empty, or whitespace
-      if (string.IsNullOrWhiteSpace(title)) return null;
-      // Trim whitespace from the title
-      var key = title.Trim();
-      // Return the first media item that matches the title (case-insensitive)
-      return _store.FirstOrDefault(m =>
-      m.Title.Equals(key, StringComparison.OrdinalIgnoreCase));
-
-      // Empty line for spacing
-
-      // Empty line for spacing
-
-    }
-
-    // Implementation of the GetAll method to retrieve all media items
-    public List<IMedia> GetAll()
-    {
-      // Return a new list containing all media items from the store
-      return _store.ToList();
-    }
-
-    // Empty line for spacing
-
-   }
 }
-
-// Empty line for spacing
-
-// Empty line for spacing
-
-// Empty line for spacing

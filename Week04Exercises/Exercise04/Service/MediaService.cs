@@ -3,58 +3,77 @@
 using media.models;
 // Import the media repositories namespace to use IMediaRepository interface
 using media.Repositories;
+
 // Define the namespace for media services
 namespace media.Services
 {
-    // Define the MediaService class to handle business logic for media operations
+    /// <summary>
+    /// MediaService - Service klasse voor business logic van media operaties
+    /// Implementeert het Service Layer Pattern voor scheiding van business logic en data toegang
+    /// Gebruikt Dependency Injection voor losse koppeling met repository
+    /// </summary>
     public class MediaService
     {
-        // Private readonly field to store the repository dependency
+        /// <summary>
+        /// Repository dependency voor data toegang
+        /// Private readonly voor immutability en dependency injection
+        /// </summary>
         private readonly IMediaRepository _repo;
 
-        // Constructor to initialize the service with a repository (dependency injection)
+        /// <summary>
+        /// Constructor voor dependency injection van repository
+        /// Initialiseert de service met een repository implementatie
+        /// </summary>
+        /// <param name="repo">Repository implementatie voor data toegang</param>
         public MediaService(IMediaRepository repo)
         {
-            // Assign the provided repository to the private field
+            // Wijs de opgegeven repository toe aan de private field
             _repo = repo;
         }
 
-        // Method to add a new media item with validation
+        /// <summary>
+        /// Voegt een nieuw media item toe met validatie
+        /// Business logic: controleert of titel geldig is voordat toevoegen
+        /// </summary>
+        /// <param name="media">Het media object om toe te voegen</param>
+        /// <exception cref="ArgumentException">Wordt gegooid als titel ongeldig is</exception>
         public void Add(IMedia media)
         {
-            // Validate that the media title is not null, empty, or whitespace
+            // Valideer dat de media titel niet null, leeg of alleen whitespace is
             if (string.IsNullOrWhiteSpace(media.Title))
-                // Throw an exception if the title is invalid
+            {
+                // Gooi exception als titel ongeldig is
                 throw new ArgumentException("Title is required");
-            // Add the media item to the repository if validation passes
+            }
+            
+            // Voeg het media item toe aan de repository als validatie slaagt
             _repo.Add(media);
-
-            // Empty line for spacing
         }
 
-        // Empty line for spacing
-
-        // Method to get a media item by title with validation
+        /// <summary>
+        /// Haalt een media item op basis van titel op met validatie
+        /// Business logic: controleert of zoekterm geldig is
+        /// </summary>
+        /// <param name="title">Titel om naar te zoeken</param>
+        /// <returns>Media object of null als niet gevonden</returns>
         public IMedia GetByTitle(string title)
         {
-            // Return null if the title is null, empty, or whitespace
+            // Return null als titel null, leeg of alleen whitespace is
             if (string.IsNullOrWhiteSpace(title)) return null;
-            // Get the media item from the repository
+            
+            // Haal het media item op uit de repository
             return _repo.Get(title);
-
-            // Empty line for spacing
         }
 
-        // Empty line for spacing
-
-        // Method to get all media items
+        /// <summary>
+        /// Haalt alle media items op uit de repository
+        /// Business logic: geen extra validatie nodig, direct doorgeven aan repository
+        /// </summary>
+        /// <returns>Lijst van alle media objecten</returns>
         public List<IMedia> GetAll()
         {
-            // Return all media items from the repository
+            // Return alle media items uit de repository
             return _repo.GetAll();
         }
-
-        // Empty line for spacing
-
     }
 }

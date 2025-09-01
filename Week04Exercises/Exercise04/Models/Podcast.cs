@@ -4,51 +4,59 @@
 // Define the namespace for media models
 namespace media.models;
 
-// Define the Podcast class that implements the IMedia interface
+/// <summary>
+/// Podcast - Concrete implementatie van IMedia voor podcasts
+/// Representeert een podcast met specifieke eigenschappen zoals host en aantal afleveringen
+/// Demonstreert inheritance en interface implementatie
+/// </summary>
 public class Podcast : IMedia
 {
-    // Property to store the title of the podcast
+    /// <summary>
+    /// Titel van de podcast (implementatie van IMedia.Title)
+    /// </summary>
     public string Title { get; set; }
 
-    // Property to store the number of episodes in the podcast
+    /// <summary>
+    /// Aantal afleveringen in de podcast
+    /// </summary>
     public int NumberOfEpisodes { get; set; }
 
-    // Property to store the host of the podcast
+    /// <summary>
+    /// Host of presentator van de podcast
+    /// </summary>
     public string Host { get; set; }
 
-    // Empty line for spacing
-
-    // Constructor to create a new Podcast object with all required properties
+    /// <summary>
+    /// Constructor voor het maken van een nieuwe Podcast
+    /// Initialiseert alle properties met de opgegeven waarden
+    /// </summary>
+    /// <param name="title">Titel van de podcast</param>
+    /// <param name="numberofepisodes">Aantal afleveringen</param>
+    /// <param name="host">Host van de podcast</param>
     public Podcast(string title, int numberofepisodes, string host)
     {
-        // Assign the title parameter to the Title property
+        // Wijs alle parameters toe aan de properties
         Title = title;
-        // Assign the number of episodes parameter to the NumberOfEpisodes property
         NumberOfEpisodes = numberofepisodes;
-        // Assign the host parameter to the Host property
-        Host= Host;
-        
-        // Empty line for spacing
+        Host = host;  // Fix: was Host= Host (bug)
     }
 
-    // Override the ToString method to provide a custom string representation
+    /// <summary>
+    /// Override van ToString() voor een leesbare string representatie
+    /// Toont alle belangrijke eigenschappen van de podcast
+    /// </summary>
+    /// <returns>Geformatteerde string met podcast details</returns>
     public override string ToString()
-        {
-            // Return a formatted string with all podcast details
-            return $" Title: {Title},  NumberOfEpisodes {NumberOfEpisodes},Host {Host}";
-        }
+    {
+        return $"Title: {Title}, NumberOfEpisodes: {NumberOfEpisodes}, Host: {Host}";
+    }
 
-        // Empty line for spacing
-        
-        // Implementation of the Consume method from IMedia interface
-        public void Consume()
-        {
-            // Display a message indicating the podcast is being consumed
-            Console.WriteLine($"  ThisPocast is getting consumed");
-        }
-
-        // Empty line for spacing
-
-        // Empty line for spacing
-
+    /// <summary>
+    /// Implementatie van IMedia.Consume()
+    /// Definieert hoe een podcast wordt geconsumeerd (beluisterd)
+    /// </summary>
+    public void Consume()
+    {
+        Console.WriteLine($"This Podcast is getting consumed");
+    }
 }
